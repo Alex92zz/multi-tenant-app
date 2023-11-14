@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^mintcommercial\.co\.uk$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.mintcommercial\.co\.uk$
+RewriteRule ^/?$ "https\:\/\/mintcommercial\.co\.uk\/" [R=301,L]
+
