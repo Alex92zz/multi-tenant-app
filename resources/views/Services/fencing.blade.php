@@ -2,7 +2,7 @@
 
 
 @section('meta')
-    <title>Block Paving</title>
+    <title>Fencing</title>
     <meta name="description" content="">
     <meta name="author" content="JB Block Paving & Landscapers">
 @endsection
@@ -16,18 +16,18 @@
 @section('content')
     <!-- Banner Section -->
     <section class="page-banner">
-        <div class="image-layer" style="background-image: url({{ asset('images/services/block-paving.jpg') }});"></div>
+        <div class="image-layer" style="background-image: url({{ asset('images/services/garden-fencing.jpg') }});"></div>
         <div class="banner-bottom-pattern"></div>
 
         <div class="banner-inner">
             <div class="auto-container">
                 <div class="inner-container clearfix">
-                    <h1>Block Paving</h1>
+                    <h1>Fencing</h1>
                     <div class="page-nav">
                         <ul class="bread-crumb clearfix">
                             <li><a href="./"><span class="fa fa-home"></span></a></li>
                             <li>Services</li>
-                            <li class="active">Block Paving</li>
+                            <li class="active">Fencing</li>
                         </ul>
                     </div>
                 </div>
@@ -49,13 +49,14 @@
                             <div class="title-icon"><span class="icon"><img src="images/icons/leaf-two.png" alt=""
                                         title=""></span></div>
                             <div class="subtitle">Service Details</div>
-                            <h2>Block Paving</h2>
+                            <h2>Fencing</h2>
                         </div>
                         <div class="upper-content">
-                            <div class="big-text">Count on our expertise and precise workmanship to deliver exceptional
-                                block paving services for your driveway and patio. </div>
+                            <div class="big-text">
+                                From intricate designs to durable structures, we deliver fencing services that go beyond the ordinary, ensuring your space is not just secured but also adorned with the finest details.
+                            </div>
                             <div class="main-image">
-                                <img src="images/services/block-paving-2.jpg" alt="Block Paving">
+                                <img src="images/services/fencing-garden.jpg" alt="Fencing">
                             </div>
                             <div class="text">
                                 <h5>Table of Contents</h5>
@@ -63,30 +64,27 @@
                                     <div class="inner">
                                         <div class="lower-text text">
                                             <ul>
-                                                <li><a href="#satisfaction-guarantee">Satisfaction Guarantee</a></li>
-                                                <li><a href="#style">Style</a></li>
-                                                <li><a href="#low-maintenance">Low Maintenance</a></li>
-                                                <li><a href="#pathways-and-patios">Pathways and Patios</a></li>
-                                                <li><a href="#paving-and-landscaping">Paving and Landscaping</a></li>
-                                                <li><a href="#your-paving-partner">Your Paving Partner</a></li>
+                                                <li><a href="#artistry-of-fencing">Unveiling the Artistry of Fencing</a></li>
+                                                <li><a href="#diverse-fencing-solutions">Diverse Fencing Solutions for Every Need</a></li>
+                                                <li><a href="#security-beyond-boundaries">Security Beyond Boundaries</a></li>
+                                                <li><a href="#tailored-fencing-designs">Tailored Fencing Designs for Your Lifestyle</a></li>
+                                                <li><a href="#eco-friendly-fencing">Eco-Friendly Fencing Options</a></li>
+                                                <li><a href="#professional-fencing-installation-and-maintenance">Professional Fencing Installation and Maintenance Services</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                                 <p>
-                                    Welcome to JB Block Paving & Landscapers, your newly established, go-to specialist for
-                                    paving and landscaping solutions. With a commitment to excellence, we bring a fresh
-                                    perspective ensuring your outdoor spaces are not just paved but
-                                    transformed into enduring works of art. Benefits of choosing our block paving services:
+                                    Welcome to JB Block Paving & Landscapers, your premier destination for expert fencing solutions. With a dedication to excellence, we introduce a new era in fencing, where your outdoor spaces are not just enclosed but elevated into secure and stylish realms. Discover the benefits of choosing our fencing services:
                                 </p>
                             <div class="row clearfix">
                                 <div class="feature-block col-lg-6 col-md-6 col-sm-12">
                                     <div class="inner">
                                         <div class="lower-text text">
                                             <ul>
-                                                <li>Increased House Value</li>
-                                                <li>Robust and Durable</li>
-                                                <li>Easy Maintenance</li>
+                                                <li>Enhanced Security and Privacy</li>
+                                                <li>Boost Property Value and Appeal</li>
+                                                <li>Personalized Privacy</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -95,61 +93,38 @@
                                     <div class="inner">
                                         <div class="lower-text text">
                                             <ul>
-                                                <li>Swift and Efficient Installation</li>
-                                                <li>Cool Surface Temperature</li>
-                                                <li>Simple and Cost-Effective Repairs</li>
+                                                <li>Low Maintenance, High Durability Fencing</li>
+                                                <li>Eco-Friendly Fencing Options</li>
+                                                <li>Comprehensive Fencing Service</li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                                <h3>Unparalleled Craftsmanship and Satisfaction Guarantee </h3>
-                                <p id="satisfaction-guarantee">At JB Block Paving & Landscapers, we stand by our promise of
-                                    unparalleled quality of
-                                    workmanship. Our skilled team guarantees unbeatable prices, quick turnaround times, and
-                                    a 100% satisfaction guarantee. From driveways to patios, we have the expertise to exceed
-                                    your expectations and make your outdoor dreams a reality.
+                                <h3>Unveiling the Artistry of Fencing</h3>
+                                <p id="artistry-of-fencing">
+                                    At JB Block Paving & Landscapers, we take pride in transforming mere boundaries into works of art. Our fencing services are designed to not only secure your property but also enhance its aesthetic appeal. Discover the artistry of fencing as we combine functionality with eye-catching designs to elevate your outdoor space.
                                 </p>
-                                <h3 id="style">Style Tailored to You</h3>
+                                <h3 id="diverse-fencing-solutions">Diverse Fencing Solutions for Every Need</h3>
                                 <p>
-                                    Discover a myriad of choices in styles, patterns, thicknesses, textures, and colors for
-                                    your block paving. Our expert team is ready to guide you through the design stage,
-                                    offering inspiration and ideas. Whether you lean towards traditional herringbone
-                                    patterns or desire a contemporary or rustic look, we turn your visions into reality with
-                                    precision and excellence.
+                                    No two properties are alike, and neither should be their fences. Our company offers a diverse range of fencing solutions to cater to the unique needs and preferences of our clients. From classic wooden fences exuding warmth to modern metal structures exuding sophistication, JB Block Paving & Landscapers has the perfect fencing option for every taste.
                                 </p>
-                                <h3 id="low-maintenance">Durable and Low-Maintenance Elegance</h3>
+                                <h3 id="security-beyond-boundaries">Security Beyond Boundaries</h3>
                                 <p>
-                                    Block paving isn't just about aesthetics; it's a durable and low-maintenance solution
-                                    for your driveway. Unlike tarmac or asphalt, block paving withstands wear and tear
-                                    without cracking. It remains cool in the summer, making it an ideal choice for those who
-                                    park their cars on the driveway.
+                                    Security is paramount, and our fencing services go beyond mere visual appeal. Explore our selection of robust and durable fencing materials that provide a reliable barrier against unwanted intruders. We prioritize your safety without compromising on the elegance of your property, ensuring peace of mind for you and your loved ones.
                                 </p>
 
-                                <h3 id="pathways-and-patios">Pathways and Patios Redefined</h3>
-                                <p>Extend the beauty of block paving to pathways and patios. Our small stones create a
-                                    robust support structure, allowing for easy customization of curved pathways through
-                                    gardens or connections between driveways and houses. Say goodbye to the worries of rot,
-                                    insects, and maintenance associated with wood decking; block paving provides a
-                                    hassle-free solution.</p>
+                                <h3 id="tailored-fencing-designs">Tailored Fencing Designs for Your Lifestyle</h3>
+                                <p>Your property is a reflection of your lifestyle, and our fencing designs are tailored to complement it seamlessly. Whether you prefer a private retreat with high fencing or an open concept that seamlessly merges with the surroundings, JB Block Paving & Landscapers crafts fencing solutions that align with your lifestyle and preferences.</p>
 
-                                <h3 id="paving-and-landscaping">Expertise in Paving and Landscaping</h3>
+                                <h3 id="eco-friendly-fencing">Eco-Friendly Fencing Options</h3>
                                 <p>
-                                    Explore our paving and landscaping expertise at JB Block Paving & Landscapers, where
-                                    we've quickly become a trusted name. Our comprehensive services include paths, patio
-                                    design and construction, block paving, brickwork, rockeries, and garden walls. For
-                                    additional services like landscaping, drainage, groundwork, and driveway asphalting, our
-                                    team ensures a thorough job and a free cleanup service at the project's completion.
+                                    In an era of environmental consciousness, our company is committed to offering eco-friendly fencing options. Explore our range of sustainable materials and practices that contribute to a greener planet while providing the security and style you desire. At JB Block Paving & Landscapers, we believe in building a better future, one fence at a time.
                                 </p>
 
-                                <h3 id="your-paving-partner">Your Paving Partner</h3>
+                                <h3 id="professional-fencing-installation-and-maintenance">Professional Fencing Installation and Maintenance Services</h3>
                                 <p>
-                                    Take advantage of our extensive experience without worrying about sub-contractors. We
-                                    provide paving and landscaping services at reasonable prices, and our professional team
-                                    handles all work without compromises. Call us today to discuss your requirements, and
-                                    our staff will guide you, providing advice and a free quote without any upfront
-                                    deposits. Elevate your outdoor spaces with confidence - choose JB Block Paving &
-                                    Landscapers for a transformation that lasts.
+                                    Our commitment to excellence extends beyond the design phase. Benefit from our professional installation services that ensure your fence stands the test of time. Additionally, we offer maintenance services to keep your fencing looking pristine year after year. Trust JB Block Paving & Landscapers for quality craftsmanship and reliable, long-lasting fencing solutions.
                                 </p>
                             </div>
 
@@ -160,21 +135,21 @@
                                     <div class="block col-lg-4 col-md-4 col-sm-12">
                                         <div class="inner">
                                             <h4>Initial Consultation </h4>
-                                            <div class="text">Collaborate with our experts to craft a captivating block paving design.</div>
+                                            <div class="text">Collaborate with our experts to design a captivating fencing layout tailored to your preferences.</div>
                                             <div class="count"><span>01</span></div>
                                         </div>
                                     </div>
                                     <div class="block col-lg-4 col-md-4 col-sm-12">
                                         <div class="inner">
                                             <h4>Get Your Plan </h4>
-                                            <div class="text">Review and approve your final block paving plan for optimal functionality and aesthetics.</div>
+                                            <div class="text">Review and approve your final fencing plan for optimal security and visual appeal.</div>
                                             <div class="count"><span>02</span></div>
                                         </div>
                                     </div>
                                     <div class="block col-lg-4 col-md-4 col-sm-12">
                                         <div class="inner">
                                             <h4>Start a Project </h4>
-                                            <div class="text">Initiate your block paving project with our skilled professional team.</div>
+                                            <div class="text">Initiate your fencing project with our skilled professional team.</div>
                                             <div class="count"><span>03</span></div>
                                         </div>
                                     </div>
@@ -206,8 +181,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/block-paving-garden.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/block-paving-garden.jpg" alt="Block Paving Garden"></a>
+                            <a href="images/services/garden-fence.jpg" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/garden-fence.jpg" alt="Fencing Garden"></a>
 
                         </div>
                     </div>
@@ -217,8 +192,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/block-paving-garden-2.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/block-paving-garden-2.jpg" alt="Block Paving Garden photo 2"></a>
+                            <a href="images/services/nice-design-fence-garden.jpg" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/nice-design-fence-garden.jpg" alt="Fencing Garden photo 2"></a>
 
                         </div>
                     </div>
@@ -228,8 +203,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/block-paving-garden-3.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/block-paving-garden-3.jpg" alt="Block Paving Garden photo 3"></a>
+                            <a href="images/services/block-paving-garden-4.jpg" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/block-paving-garden-4.jpg" alt="Fencing Garden photo 3"></a>
 
                         </div>
                     </div>
@@ -239,8 +214,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/block-paving-garden-7.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/block-paving-garden-7.jpg" alt="Block Paving Garden photo 4"></a>
+                            <a href="images/services/wooden-wall-garden.jpg" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/wooden-wall-garden.jpg" alt="Fencing Garden photo 4"></a>
 
                         </div>
                     </div>
@@ -250,8 +225,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/block-paving-garden-5.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/block-paving-garden-5.jpg" alt="Block Paving Garden photo 5"></a>
+                            <a href="images/services//wooden-stairs-garden.jpg" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/wooden-stairs-garden.jpg" alt="Fencing Garden photo 5"></a>
 
                         </div>
                     </div>
@@ -261,8 +236,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/block-paving-garden-6.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/block-paving-garden-6.jpg" alt="Block Paving Garden photo 6"></a>
+                            <a href="images/services/garden-new-fence.jpg" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/garden-new-fence.jpg" alt="Fencing Garden photo 6"></a>
 
                         </div>
                     </div>
