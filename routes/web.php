@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Services\BlockPavingPageController;
 use App\Http\Controllers\BlogPageController;
 
 use App\Http\Controllers\CategoryController;
@@ -29,9 +30,7 @@ Route::get('/contact', function () {
 
 Route::get('/', [HomePageController::class, 'index'])->name('home');
 
-Route::get('/block-paving', function () {
-    return view('services.block-paving');
-})->name('block-paving');
+Route::get('/block-paving', [BlockPavingPageController::class, 'index'])->name('block-paving');
 
 Route::get('/turfing', function () {
     return view('services.turfing');

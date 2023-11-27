@@ -85,7 +85,6 @@
                                         <li><a href="{{ route('block-paving') }}">Block Paving</a></li>
                                         <li><a href="{{ route('turfing') }}">Turfing</a></li>
                                         <li><a href="{{ route('fencing') }}">Fencing</a></li>
-                                        <li><a href="{{ route('tree-removal') }}">Tree Removal</a></li>
                                         <li><a href="{{ route('tarmac-surfacing') }}">Tarmac Surfacing</a></li>
                                     </ul>
                                 </li>

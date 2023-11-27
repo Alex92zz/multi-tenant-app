@@ -8,10 +8,9 @@
                     <h4>Our Services</h4>
                 </div>
                 <ul>
-                    <li class="active"><a href="{{ route('block-paving') }}">Block Paving</a></li>
+                    <li><a href="{{ route('block-paving') }}">Block Paving</a></li>
                     <li><a href="{{ route('turfing') }}">Turfing</a></li>
                     <li><a href="{{ route('fencing') }}">Fencing</a></li>
-                    <li><a href="{{ route('tree-removal') }}">Tree Removal</a></li>
                     <li><a href="{{ route('tarmac-surfacing') }}">Tarmac Surfacing</a></li>
                 </ul>
             </div>
@@ -33,21 +32,20 @@
 
 
         <!------------------------------ Areas We Cover  ----------------------->
+        @if(isset($localSEOPages))
         <div class="sidebar-widget archives wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
             <div class="widget-inner">
                 <div class="sidebar-title">
                     <h4>Areas we cover</h4>
                 </div>
                 <ul>
-                    <li><a href="/tree-surgeon-halesowen"><span class="ttl">Halesowen</span> </a></li>
-                    <li><a href="/tree-surgeon-kidderminster"><span class="ttl">Kidderminster</span> </a></li>
-                    <li><a href="/tree-surgeon-worcester"><span class="ttl">Worcester</span> </a></li>
-                    <li><a href="/tree-surgeon-bromsgrove"><span class="ttl">Bromsgrove</span> </a></li>
-                    <li><a href="/tree-surgeon-stourbridge"><span class="ttl">Stourbridge</span> </a></li>
-                    <li><a href="/tree-surgeon-oldbury"><span class="ttl">Oldbury</span> </a></li>
+                    @foreach($localSEOPages as $localSEO)
+                    <li><a href="{{ $localSEO->slug }}"><span class="ttl">{{ $localSEO->location }}</span></a></li>
+                @endforeach
                 </ul>
             </div>
         </div>
+        @endif
 
 
     </aside>

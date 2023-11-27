@@ -77,29 +77,36 @@
                                                         class="icon flaticon-garden"></span><span class="txt">Tree
                                                         Care Services</span><span class="sub-txt">Details <i
                                                             class="arrow flaticon-play-button-1"></i></span></a></li>
-                                            <li><a href="index.php#services"><span
+                                            <li><a href="{{ route('turfing') }}"><span
                                                         class="icon flaticon-sprinkler"></span><span
-                                                        class="txt">Turfing</span><span class="sub-txt">Details <i
+                                                        class="txt">
+                                                        Turfing
+                                                    </span><span class="sub-txt">Details <i
                                                             class="arrow flaticon-play-button-1"></i></span></a></li>
-                                            <li><a href="index.php#services"><span
-                                                        class="icon flaticon-park-1"></span><span class="txt">Decking
-                                                        And Fencing</span><span class="sub-txt">Details <i
+                                            <li><a href="{{ route('fencing') }}"><span
+                                                        class="icon flaticon-park-1"></span><span class="txt">
+                                                             Fencing Services
+                                                    </span><span class="sub-txt">Details <i
                                                             class="arrow flaticon-play-button-1"></i></span></a></li>
                                         </ul>
                                     </div>
                                     <div class="col-xl-6 col-lg-12 col-md-6 col-sm-12">
                                         <ul>
-                                            <li><a href="index.php#services"><span
+                                            <li><a href="{{ route('block-paving') }}"><span
                                                         class="icon flaticon-brickwall"></span><span
-                                                        class="txt">Block Paving</span><span class="sub-txt">Details
+                                                        class="txt">
+                                                        Block Paving
+                                                    </span><span class="sub-txt">Details
                                                         <i class="arrow flaticon-play-button-1"></i></span></a></li>
                                             <li><a href="index.php#services"><span
                                                         class="icon flaticon-wheelbarrow"></span><span
                                                         class="txt">Graveling</span><span class="sub-txt">Details <i
                                                             class="arrow flaticon-play-button-1"></i></span></a></li>
-                                            <li><a href="index.php#services"><span
+                                            <li><a href="{{ route('tarmac-surfacing') }}"><span
                                                         class="icon flaticon-pressure-washer"></span><span
-                                                        class="txt">Jet Washing</span><span class="sub-txt">Details
+                                                        class="txt">
+                                                        Tarmac Surfacing
+                                                    </span><span class="sub-txt">Details
                                                         <i class="arrow flaticon-play-button-1"></i></span></a></li>
                                         </ul>
                                     </div>

@@ -37,8 +37,7 @@
 
                                 </div>
                                 <div class="link-box clearfix">
-                                    <a href="#about" class="theme-btn btn-style-one"><span class="btn-title">Read
-                                            More <i class="arrow flaticon-play-button-1"></i></span></a>
+                                    <a href="{{ route('block-paving') }}" class="theme-btn btn-style-one"><span class="btn-title">Block Paving Services <i class="arrow flaticon-play-button-1"></i></span></a>
                                     <a href="#contact" class="theme-btn btn-style-two"><span class="btn-title">Contact Us <i
                                                 class="arrow flaticon-play-button-1"></i></span></a>
                                 </div>
@@ -64,7 +63,7 @@
                                     surfacing needs.
                                 </div>
                                 <div class="link-box clearfix">
-                                    <a href="#services" class="theme-btn btn-style-one"><span class="btn-title">Services <i
+                                    <a href="{{ route('tarmac-surfacing') }}" class="theme-btn btn-style-one"><span class="btn-title">Tarmac Surfacing <i
                                                 class="arrow flaticon-play-button-1"></i></span></a>
                                     <a href="#contact" class="theme-btn btn-style-three"><span class="btn-title">Contact Us
                                             <i class="arrow flaticon-play-button-1"></i></span></a>
@@ -92,10 +91,9 @@
                                     personalized quote.
                                 </div>
                                 <div class="link-box clearfix">
-                                    <a href="#services" class="theme-btn btn-style-one"><span class="btn-title">Read
-                                            More <i class="arrow flaticon-play-button-1"></i></span></a>
-                                    <a href="#testimonials" class="theme-btn btn-style-two"><span
-                                            class="btn-title">Testimonials <i
+                                    <a href="{{ route('fencing') }}" class="theme-btn btn-style-one"><span class="btn-title">Fencing Services <i class="arrow flaticon-play-button-1"></i></span></a>
+                                    <a href="#contact" class="theme-btn btn-style-two"><span
+                                            class="btn-title">Contact Us <i
                                                 class="arrow flaticon-play-button-1"></i></span></a>
                                 </div>
                             </div>

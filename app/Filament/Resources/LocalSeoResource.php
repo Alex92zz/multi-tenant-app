@@ -60,14 +60,13 @@ class LocalSeoResource extends Resource
                     
                     TextInput::make('location')->required(),
                     
-
-                    RichEditor::make('header_text')->required()->disableToolbarButtons([
-                        'attachFiles',
-                        'codeBlock',
-                    ])->label('Header Paragraph, max 30 words'),
-                    TextInput::make('about_us_green_subtitle')->required(),
+                    Hidden::make('header_text')
+                        ->default('John'),
+                    TextInput::make('about_us_green_subtitle')
+                    ->label('Text above the first image, aprox 18 words')
+                    ->required(),
                     RichEditor::make('about_us_paragraph')
-                    ->label('About Us paragraph, max 100 words')
+                    ->label('Main Paragraph, 6 subtitles, aprox 360 words')
                     ->required()
                     ->disableToolbarButtons([
                         'attachFiles',
