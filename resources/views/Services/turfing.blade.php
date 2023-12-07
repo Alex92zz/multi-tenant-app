@@ -16,7 +16,7 @@
 @section('content')
     <!-- Banner Section -->
     <section class="page-banner">
-        <div class="image-layer" style="background-image: url({{ asset('images/services/turfing-garden.jpg') }});"></div>
+        <div class="image-layer" style="background-image: url({{ asset('images/services/turfing-garden.webp') }});"></div>
         <div class="banner-bottom-pattern"></div>
 
         <div class="banner-inner">
@@ -46,7 +46,7 @@
                 <div class="content-side col-lg-8 col-md-12 col-sm-12">
                     <div class="service-details">
                         <div class="sec-title">
-                            <div class="title-icon"><span class="icon"><img loading="lazy" src="images/icons/leaf-two.png" alt=""
+                            <div class="title-icon"><span class="icon"><img loading="lazy" src="images/icons/leaf-two.png" alt="Leaf icon"
                                         title=""></span></div>
                             <div class="subtitle">Service Details</div>
                             <h2>Turfing Services</h2>
@@ -54,7 +54,7 @@
                         <div class="upper-content">
                             <div class="big-text">Lush lawns begin here! Transform your space with our expert turfing services—where green dreams become reality effortlessly.</div>
                             <div class="main-image">
-                                <img loading="lazy" src="images/services/turfing-front-house.jpg" alt="Turfing front house">
+                                <img loading="lazy" src="images/services/turfing-front-house.webp" alt="Turfing front house">
                             </div>
                             <div class="text">
                                 <h5>Table of Contents</h5>
@@ -160,7 +160,7 @@
 
                 </div>
 
-                @include('Services.components.side-bar')
+                @include('services.components.side-bar')
 
             </div>
         </div>
@@ -178,8 +178,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/turfing-and-wood-wall.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/turfing-and-wood-wall.jpg" alt="Turfing garden"></a>
+                            <a href="images/services/turfing-and-wood-wall.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/turfing-and-wood-wall.webp" alt="Turfing garden"></a>
 
                         </div>
                     </div>
@@ -189,8 +189,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/turfing-garden-beautiful.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/turfing-garden-beautiful.jpg" alt="Beautiful Turfing in the garden"></a>
+                            <a href="images/services/turfing-garden-beautiful.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/turfing-garden-beautiful.webp" alt="Beautiful Turfing in the garden"></a>
 
                         </div>
                     </div>
@@ -200,8 +200,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/front-house-turfing-lawn.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/front-house-turfing-lawn.jpg" alt="Turfing lawn front house"></a>
+                            <a href="images/services/front-house-turfing-lawn.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/front-house-turfing-lawn.webp" alt="Turfing lawn front house"></a>
 
                         </div>
                     </div>
@@ -211,8 +211,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/front-house-turfing-lawn-2.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/front-house-turfing-lawn-2.jpg" alt="Turfing lawn front house"></a>
+                            <a href="images/services/front-house-turfing-lawn-2.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/front-house-turfing-lawn-2.webp" alt="Turfing lawn front house"></a>
 
                         </div>
                     </div>
@@ -222,8 +222,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/turfing-garden-2.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/turfing-garden-2.jpg" alt="Garden Turfing "></a>
+                            <a href="images/services/turfing-garden-2.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/turfing-garden-2.webp" alt="Garden Turfing "></a>
                         </div>
                     </div>
                 </div>
@@ -232,8 +232,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/turfing-big-garden.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/turfing-big-garden.jpg" alt="Turfing Big garden"></a>
+                            <a href="images/services/turfing-big-garden.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/turfing-big-garden.webp" alt="Turfing Big garden"></a>
 
                         </div>
                     </div>

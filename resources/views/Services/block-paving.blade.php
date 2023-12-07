@@ -46,7 +46,7 @@
                 <div class="content-side col-lg-8 col-md-12 col-sm-12">
                     <div class="service-details">
                         <div class="sec-title">
-                            <div class="title-icon"><span class="icon"><img loading="lazy" src="images/icons/leaf-two.png" alt=""
+                            <div class="title-icon"><span class="icon"><img loading="lazy" src="images/icons/leaf-two.png" alt="Leaf icon"
                                         title=""></span></div>
                             <div class="subtitle">Service Details</div>
                             <h2>Block Paving</h2>
@@ -188,7 +188,7 @@
 
                 </div>
 
-                @include('Services.components.side-bar')
+                @include('services.components.side-bar')
 
             </div>
         </div>

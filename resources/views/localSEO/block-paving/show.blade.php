@@ -47,7 +47,7 @@
                     <div class="service-details">
                         <div class="sec-title">
                             <div class="title-icon"><span class="icon"><img loading="lazy" src="images/icons/leaf-two.png"
-                                        alt="" title=""></span></div>
+                                        alt="Leaf icon"></span></div>
                             <div class="subtitle">Service Details</div>
                             <h2>{{ $post->category }} in {{ $post->location }}</h2>
                         </div>
@@ -134,7 +134,7 @@
 
                 </div>
 
-                @include('Services.components.side-bar')
+                @include('services.components.side-bar')
 
             </div>
         </div>

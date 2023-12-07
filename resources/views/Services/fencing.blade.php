@@ -16,7 +16,7 @@
 @section('content')
     <!-- Banner Section -->
     <section class="page-banner">
-        <div class="image-layer" style="background-image: url({{ asset('images/services/garden-fencing.jpg') }});"></div>
+        <div class="image-layer" style="background-image: url({{ asset('images/services/garden-fencing.webp') }});"></div>
         <div class="banner-bottom-pattern"></div>
 
         <div class="banner-inner">
@@ -46,8 +46,8 @@
                 <div class="content-side col-lg-8 col-md-12 col-sm-12">
                     <div class="service-details">
                         <div class="sec-title">
-                            <div class="title-icon"><span class="icon"><img src="images/icons/leaf-two.png" alt=""
-                                        title=""></span></div>
+                            <div class="title-icon"><span class="icon"><img src="images/icons/leaf-two.png" alt="Leaf icon"
+                                        ></span></div>
                             <div class="subtitle">Service Details</div>
                             <h2>Fencing</h2>
                         </div>
@@ -56,7 +56,7 @@
                                 From intricate designs to durable structures, we deliver fencing services that go beyond the ordinary, ensuring your space is not just secured but also adorned with the finest details.
                             </div>
                             <div class="main-image">
-                                <img src="images/services/fencing-garden.jpg" alt="Fencing">
+                                <img src="images/services/fencing-garden.webp" alt="Fencing garden">
                             </div>
                             <div class="text">
                                 <h5>Table of Contents</h5>
@@ -163,7 +163,7 @@
 
                 </div>
 
-                @include('Services.components.side-bar')
+                @include('services.components.side-bar')
 
             </div>
         </div>
@@ -181,8 +181,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/garden-fence.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/garden-fence.jpg" alt="Fencing Garden"></a>
+                            <a href="images/services/garden-fence.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/garden-fence.webp" alt="Fencing Garden"></a>
 
                         </div>
                     </div>
@@ -192,8 +192,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/nice-design-fence-garden.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/nice-design-fence-garden.jpg" alt="Fencing Garden photo 2"></a>
+                            <a href="images/services/nice-design-fence-garden.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/nice-design-fence-garden.webp" alt="Fencing Garden photo 2"></a>
 
                         </div>
                     </div>
@@ -203,8 +203,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/block-paving-garden-4.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/block-paving-garden-4.jpg" alt="Fencing Garden photo 3"></a>
+                            <a href="images/services/block-paving-garden-4.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/block-paving-garden-4.webp" alt="Fencing Garden photo 3"></a>
 
                         </div>
                     </div>
@@ -214,8 +214,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/wooden-wall-garden.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/wooden-wall-garden.jpg" alt="Fencing Garden photo 4"></a>
+                            <a href="images/services/wooden-wall-garden.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/wooden-wall-garden.webp" alt="Fencing Garden photo 4"></a>
 
                         </div>
                     </div>
@@ -225,8 +225,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services//wooden-stairs-garden.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/wooden-stairs-garden.jpg" alt="Fencing Garden photo 5"></a>
+                            <a href="images/services/wooden-stairs-garden.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/wooden-stairs-garden.webp" alt="Fencing Garden photo 5"></a>
 
                         </div>
                     </div>
@@ -236,8 +236,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/garden-new-fence.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/garden-new-fence.jpg" alt="Fencing Garden photo 6"></a>
+                            <a href="images/services/garden-new-fence.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/garden-new-fence.webp" alt="Fencing Garden photo 6"></a>
 
                         </div>
                     </div>

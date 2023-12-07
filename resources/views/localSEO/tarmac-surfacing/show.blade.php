@@ -16,7 +16,7 @@
 @section('content')
     <!-- Banner Section -->
     <section class="page-banner">
-        <div class="image-layer" style="background-image: url({{ asset('images/services/tarmac-surfacing.jpeg') }});"></div>
+        <div class="image-layer" style="background-image: url({{ asset('images/services/tarmac-surfacing.webp') }});"></div>
         <div class="banner-bottom-pattern"></div>
 
         <div class="banner-inner">
@@ -46,8 +46,8 @@
                 <div class="content-side col-lg-8 col-md-12 col-sm-12">
                     <div class="service-details">
                         <div class="sec-title">
-                            <div class="title-icon"><span class="icon"><img src="images/icons/leaf-two.png" alt=""
-                                        title=""></span></div>
+                            <div class="title-icon"><span class="icon"><img src="images/icons/leaf-two.png" alt="Leaf icon"
+                                        ></span></div>
                             <div class="subtitle">Service Details</div>
                             <h2>Tarmac Surfacing</h2>
                         </div>
@@ -56,7 +56,7 @@
                                 Affordable Tarmac Surfacing: Elevate Your Surroundings with Top-Quality Paving Services at Budget-Friendly Rates!
                             </div>
                             <div class="main-image">
-                                <img src="images/services/tarmac-surfacing-driveway-uk.jpg" alt="Tarmac Surfacing Driveway">
+                                <img src="images/services/tarmac-surfacing-driveway-uk.webp" alt="Tarmac Surfacing Driveway">
                             </div>
                             <div class="text">
                                 <h5>Table of Contents</h5>
@@ -167,7 +167,7 @@
 
                 </div>
 
-                @include('Services.components.side-bar')
+                @include('services.components.side-bar')
 
             </div>
         </div>
@@ -185,8 +185,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/tarmac-driveway-affordable.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/tarmac-driveway-affordable.jpg" alt="Tarmac Surfacing Driveway"></a>
+                            <a href="images/services/tarmac-driveway-affordable.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/tarmac-driveway-affordable.webp" alt="Tarmac Surfacing Driveway"></a>
 
                         </div>
                     </div>
@@ -196,8 +196,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/tarmac-driveway-front-house.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/tarmac-driveway-front-house.jpg" alt="Tarmac Surfacing Driveway photo 2"></a>
+                            <a href="images/services/tarmac-driveway-front-house.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/tarmac-driveway-front-house.webp" alt="Tarmac Surfacing Driveway photo 2"></a>
 
                         </div>
                     </div>
@@ -207,8 +207,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/tarmac-resurfacing.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/tarmac-resurfacing.jpg" alt="Tarmac Surfacing Driveway photo 3"></a>
+                            <a href="images/services/tarmac-resurfacing.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/tarmac-resurfacing.webp" alt="Tarmac Surfacing Driveway photo 3"></a>
 
                         </div>
                     </div>
@@ -218,8 +218,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/tarmac-surfacing-driveway.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/tarmac-surfacing-driveway.jpg" alt="Tarmac Surfacing Driveway photo 4"></a>
+                            <a href="images/services/tarmac-surfacing-driveway.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/tarmac-surfacing-driveway.webp" alt="Tarmac Surfacing Driveway photo 4"></a>
 
                         </div>
                     </div>
@@ -229,8 +229,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/tarmac-surfacing-driveway-uk.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/tarmac-surfacing-driveway-uk.jpg" alt="Tarmac Surfacing Driveway photo 5"></a>
+                            <a href="images/services/tarmac-surfacing-driveway-uk.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/tarmac-surfacing-driveway-uk.webp" alt="Tarmac Surfacing Driveway photo 5"></a>
 
                         </div>
                     </div>
@@ -240,8 +240,8 @@
                 <div class="outline-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="">
-                            <a href="images/services/tarmac-surfacing-driveway-uk-2.jpg" class="lightbox-image" data-fancybox="gallery">
-                                <img loading="lazy" src="images/services/tarmac-surfacing-driveway-uk-2.jpg" alt="Tarmac Surfacing Driveway photo 6"></a>
+                            <a href="images/services/tarmac-surfacing-driveway-uk-2.webp" class="lightbox-image" data-fancybox="gallery">
+                                <img loading="lazy" src="images/services/tarmac-surfacing-driveway-uk-2.webp" alt="Tarmac Surfacing Driveway photo 6"></a>
 
                         </div>
                     </div>
