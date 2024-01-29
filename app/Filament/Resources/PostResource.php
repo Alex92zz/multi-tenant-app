@@ -30,6 +30,8 @@ class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
     
+
+    protected static ?string $navigationGroup = 'Website';
     protected static ?string $navigationLabel  = 'Blog Posts';
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';

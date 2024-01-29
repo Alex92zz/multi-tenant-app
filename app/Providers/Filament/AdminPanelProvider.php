@@ -27,6 +27,11 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+        ->navigationGroups([
+            'Website',
+            'Employees',
+            'Settings',
+        ])
             ->default()
             ->id('admin')
             ->path('admin')

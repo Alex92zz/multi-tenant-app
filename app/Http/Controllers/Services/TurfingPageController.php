@@ -8,5 +8,17 @@ use Illuminate\Http\Request;
 
 class TurfingPageController extends Controller
 {
-    //
+    public function index()
+    {
+
+        $localSEOPages = LocalSEO::where("category_slug", "turfing")->get();
+
+        // Check if any records were found before passing to the view
+        if ($localSEOPages->isNotEmpty()) {
+            return view('services.turfing', compact('localSEOPages'));
+        } else {
+            // Handle the case where no records are found (e.g., show a default view or redirect)
+            return view('services.turfing');
+        }
+    }
 }

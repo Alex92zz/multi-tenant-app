@@ -2,69 +2,102 @@
 
 
 @section('meta')
-    <title>{{ $post->title }}</title>
+    <!-- Title  -->
+    <title>{{ $post->title }} </title>
     <meta name="description" content="{{ $post->description }}">
-    <meta name="author" content="JB Block Paving & Landscapers">
+    <meta name="author" content="FMV GROUP">
+
+    <style>
+
+        figure {
+        text-align: center;
+        }
+
+.text figure > a > img {
+        max-height: 400px;
+        width: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+        </style>
 @endsection
 
+
 @section('content')
-    <div class="sidebar-page-container blog-page">
+    <main class="sub-bg">
 
-        <div class="auto-container">
-            <div class="row clearfix">
 
-                <!-- Content Side -->
-                <div class="content-side col-lg-8 col-md-12 col-sm-12">
-                    <div class="blog-content">
-                        <div class="post-details">
-                            <div class="inner-box">
-                                <div class="text">
-                                <h1>{{ $post->title }}</h1>
-                                <p>By Peter Winters on {{ \Carbon\Carbon::parse($post->updated_at)->format('d M Y') }} in <a href="">{{ $post->category->name }}</a></p>
+        <header class="page-header  bg-img" data-background="{{ asset('assets/imgs/background/petrol-extraction.jpg') }}"
+            data-overlay-dark="7">
+            <div class="container mt-60">
+                <div class="row">
+                    <div class="col-lg-8">
+
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ==================== Start Slider ==================== -->
+        <article>
+            <section class="blog-header section-padding">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <div class="caption">
+                                <div class="sub-title fz-12">
+                                    {{ $post->category->name }}
                                 </div>
-                                <div class="upper">
-                                    <div class="image-box">
-                                        <img style="max-height: 400px; width:auto; margin:0 auto;" src="{{ asset($post->thumbnail) }}"
-                                            alt="{{ $post->title }}">
-                                    </div>
-                                </div>
-                                <div class="lower">
-                                    <div class="text">
-                                        
-                                        {!! $post->content !!}
-
-                                    </div>
-
-
-                                </div>
-                                <div class="lower-info clearfix">
-                                    <div class="share-post">
-                                        <div class="social-links">
-                                            <ul class="clearfix">
-                                                <li><a
-                                                        href="https://www.facebook.com/PW-Tree-Care-Landscaping-Services-102735255324744"><span
-                                                            class="fab fa-facebook-f"></span></a></li>
-                                                <li><a href="#"><span class="fab fa-instagram"></span></a>
-                                                </li>
-                                                <li><a href="https://g.page/PWTreeCareLandscapingServices?gm"><span
-                                                            class="fab fa-google"></span></a></li>
-                                            </ul>
+                                <h1 class="fz-55 mt-30">{{ $post->title }}</h1>
+                            </div>
+                            <div class="info d-flex mt-40 align-items-center">
+                                <div class="left-info">
+                                    <div class="d-flex">
+                                        <div class="author-info">
+                                            <div class="d-flex align-items-center">
+                                                <div class="ml-20">
+                                                    <span class="opacity-7">Author</span>
+                                                    <h6 class="fz-16">Lee Woodward</h6>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div class="date ml-50">
+                                            @if ($post->created_at != $post->updated_at)
+                                                <span class="opacity-7">Updated on</span>
+                                                <h6 class="fz-16">{{ date('d F Y', strtotime($post->updated_at)) }}</h6>
+                                            @else
+                                                <span class="opacity-7">Published</span>
+                                                <h6 class="fz-16">{{ date('d F Y', strtotime($post->created_at)) }}</h6>
+                                            @endif
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </section>
 
 
-                <!-- Blog Side Bar-->
-                @include('components/blog-page-sidebar')
+            <section class="blog pb-20">
+                <div class="container">
+                    <div class="main-post">
+                        <div class="item pb-60">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10">
+                                    <img class="mb-20" src="{{ asset($post->thumbnail) }}"
+                                        style="max-height: 300px; width:auto; display:block; margin-left:auto; margin-right:auto;">
+                                    <div class="text" id="content">
+                                        {!! $post->content !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+        </article>
 
-
-
-
-            </div>
-        </div>
-    </div>
+    </main>
 @endsection

@@ -12,6 +12,9 @@ use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\LocalSEOController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\Services\FencingPageController;
+use App\Http\Controllers\Services\TarmacSurfacingController;
+use App\Http\Controllers\Services\TurfingPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,34 +33,54 @@ Route::get('/contact', function () {
 
 Route::get('/', [HomePageController::class, 'index'])->name('home');
 
-Route::get('/block-paving', [BlockPavingPageController::class, 'index'])->name('block-paving');
 
-Route::get('/turfing', function () {
-    return view('services.turfing');
-})->name('turfing');
+/* ------------------------------- About Pages ------------------------------*/
+Route::get('/about-mld', function () {
+    return view('about-pages.about-mld');
+});
 
-Route::get('/fencing', function () {
-    return view('services.fencing');
-})->name('fencing');
+Route::get('/about-fmvgroup', function () {
+    return view('about-pages.about-fmvgroup');
+});
 
-Route::get('/tree-removal', function () {
-    return view('services.tree-removal');
-})->name('tree-removal');
-
-Route::get('/tarmac-surfacing', function () {
-    return view('services.tarmac-surfacing');
-})->name('tarmac-surfacing');
-
-/* --------------------------------  Services  ------------------------------------- */
+Route::get('/about-flowlee-meter-verification', function () {
+    return view('about-pages.about-flowlee-meter-verification');
+});
 
 
 
-/* --------------------------------  Digital Marketing  ------------------------------------- */
+/* ------------------------------- Services Pages ------------------------------*/
+Route::get('/meter-verification', function () {
+    return view('services-pages.meter-verification');
+});
+
+Route::get('/electromagnetic-metering-services', function () {
+    return view('services-pages.electromagnetic-metering-services');
+});
+
+Route::get('/meter-xchange', function () {
+    return view('services-pages.meter-xchange');
+});
+
+Route::get('/leak-detection-services', function () {
+    return view('services-pages.leak-detection-services');
+});
+
+Route::get('/products', function () {
+    return view('products');
+});
 
 
-
-/* --------------------------------  Website Management  ------------------------------------- */
-
+/* -------------------------------Footer Pages ------------------------------*/
+Route::get('/anti-bribery-policy', function () {
+    return view('footer-pages.anti-bribery-policy');
+});
+Route::get('/modern-slavery-act-statement', function () {
+    return view('footer-pages.modern-slavery-act-statement');
+});
+Route::get('/privacy-policy', function () {
+    return view('footer-pages.privacy-policy');
+});
 
 /* --------------------------------  Blog  ------------------------------------- */
 Route::get('/blog', [BlogPageController::class, 'index'])->name('blog');
@@ -69,11 +92,11 @@ Route::get('category/{category}', [CategoryController::class, 'show'])->name('ca
 
 
 
+Route::get('/sitemap', [SitemapController::class, 'index'])->name('index');
 
-/* --------------------------------  Other  ------------------------------------- */
-Route::get('/sitemap', [SitemapController::class, 'index'])->name('sitemap');
+
 Route::post('contact-form/submit', [ContactFormController::class, 'submit'])->name('contactForm.submit');
 
-
+/* --------------------------------  Register  ------------------------------------- */
 Route::get('/admin/register', [RegisterController::class, 'showRegistrationForm'])->name('register-page');
 Route::post('/admin/register', [RegisterController::class, 'register'])->name('register');

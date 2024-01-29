@@ -13,6 +13,18 @@ class ContactFormController extends Controller
     
     public function submit(Request $request)
     {
+
+        // Check if enough time has passed since the last submission
+        $lastSubmitTime = $request->session()->get('last_submit_time', 0);
+        $currentTime = time();
+    
+    if ($currentTime - $lastSubmitTime < 10) {
+        return response()->json(['error' => 'Please wait at least 10 seconds before submitting the form again.'], 400);
+    }
+
+    if ($request->input('last_name')){
+        return response()->json(['error' => 'Our system detected that you are a bot. In case you are a human get in touch with us and report this error.'], 400);
+    }
         
          // Verify reCAPTCHA
         $recaptchaSecretKey = env('RECAPTCHA_SECRET_KEY');
@@ -61,6 +73,9 @@ class ContactFormController extends Controller
 
     // Log the form data to the console (error log)
     error_log('Form Data Received: ' . json_encode($formData));
+
+    // Update the last submit time in the session
+    $request->session()->put('last_submit_time', $currentTime);
 
         // Send the email
         Mail::to(env('MAIL_TO_ADDRESS'))->send(new ContactFormMail($formData));

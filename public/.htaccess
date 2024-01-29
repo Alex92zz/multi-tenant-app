@@ -16,13 +16,6 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
-# Set cache control headers for static assets
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresDefault "access plus 1 year"
-    Header append Cache-Control "public"
-</IfModule>
-
 # Enable text compression
 <IfModule mod_deflate.c>
     # Compress HTML, CSS, JavaScript, Text, XML and fonts
@@ -52,12 +45,11 @@
     SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
 </IfModule>
 
-
-
 # Set the RewriteBase to /
 RewriteBase /
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^fmvgroup\.co\.uk$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.fmvgroup\.co\.uk$
+RewriteRule ^/?$ "https\:\/\/fmvgroup\.co\.uk\/" [R=301,L]
 
-
-RewriteEngine On
-RewriteCond %{HTTPS} !=on
-RewriteRule ^(.*)$ https://mintcommercial.co.uk/$1 [R=301,L]

@@ -10,7 +10,7 @@
 
     <title>
         Register -
-        PW Tree Care &amp; Landscaping Services
+        {{ config('app.name') }}
     </title>
 
 
@@ -39,9 +39,8 @@
         }
     </style>
 
-    <link href="http://127.0.0.1:8000/css/filament/forms/forms.css?v=3.0.0.0" rel="stylesheet" data-navigate-track="">
-    <link href="http://127.0.0.1:8000/css/filament/support/support.css?v=3.0.0.0" rel="stylesheet"
-        data-navigate-track="">
+    <link href="{{ asset('css/filament/forms/forms.css?v=3.0.0.0') }}" rel="stylesheet" data-navigate-track="">
+    <link href="{{ asset('css/filament/support/support.css?v=3.0.0.0') }}" rel="stylesheet" data-navigate-track="">
 
     <style>
         :root {
@@ -113,7 +112,7 @@
             --warning-950: 69, 26, 3;
         }
     </style>
-    <link href="http://127.0.0.1:8000/css/filament/filament/app.css?v=3.0.0.0" rel="stylesheet" data-navigate-track="">
+    <link href="{{ asset('css/filament/filament/app.css?v=3.0.0.0') }}" rel="stylesheet" data-navigate-track="">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&amp;display=swap" rel="stylesheet">
@@ -715,7 +714,7 @@
                             <div class="mb-4 flex justify-center">
                                 <div
                                     class="fi-logo text-xl font-bold leading-5 tracking-tight text-gray-950 dark:text-white">
-                                    PW Tree Care &amp; Landscaping Services
+                                    {{ config('app.name') }}
                                 </div>
                             </div>
 
@@ -1023,27 +1022,16 @@
     </script>
 
 
-    <script src="http://127.0.0.1:8000/js/filament/forms/forms.js?v=3.0.0.0" data-navigate-track=""></script>
+    <script src="{{ asset('js/filament/forms/forms.js?v=3.0.0.0') }}" data-navigate-track=""></script>
+    <script src="{{ asset('js/filament/notifications/notifications.js?v=3.0.0.0') }}" data-navigate-track=""></script>
+    <script src="{{ asset('js/filament/support/async-alpine.js?v=3.0.0.0') }}" data-navigate-track=""></script>
+    <script src="{{ asset('js/filament/support/support.js?v=3.0.0.0') }}" data-navigate-track=""></script>
+    <script src="{{ asset('js/filament/tables/tables.js?v=3.0.0.0') }}" data-navigate-track=""></script>
+    <script src="{{ asset('js/filament/filament/echo.js?v=3.0.0.0') }}" data-navigate-track=""></script>
+    <script src="{{ asset('js/filament/filament/app.js?v=3.0.0.0') }}" data-navigate-track=""></script>
 
 
-    <script src="http://127.0.0.1:8000/js/filament/notifications/notifications.js?v=3.0.0.0" data-navigate-track="">
-    </script>
-
-
-    <script src="http://127.0.0.1:8000/js/filament/support/async-alpine.js?v=3.0.0.0" data-navigate-track=""></script>
-
-
-    <script src="http://127.0.0.1:8000/js/filament/support/support.js?v=3.0.0.0" data-navigate-track=""></script>
     <div id="scrnli_recorder_root"></div>
-
-
-    <script src="http://127.0.0.1:8000/js/filament/tables/tables.js?v=3.0.0.0" data-navigate-track=""></script>
-
-
-    <script src="http://127.0.0.1:8000/js/filament/filament/echo.js?v=3.0.0.0" data-navigate-track=""></script>
-
-
-    <script src="http://127.0.0.1:8000/js/filament/filament/app.js?v=3.0.0.0" data-navigate-track=""></script>
 
 
     <style>

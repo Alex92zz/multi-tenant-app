@@ -8,5 +8,17 @@ use Illuminate\Http\Request;
 
 class TarmacSurfacingController extends Controller
 {
-    //
+    public function index()
+    {
+
+        $localSEOPages = LocalSEO::where("category_slug", "tarmac-surfacing")->get();
+
+        // Check if any records were found before passing to the view
+        if ($localSEOPages->isNotEmpty()) {
+            return view('services.tarmac-surfacing', compact('localSEOPages'));
+        } else {
+            // Handle the case where no records are found (e.g., show a default view or redirect)
+            return view('services.tarmac-surfacing');
+        }
+    }
 }
