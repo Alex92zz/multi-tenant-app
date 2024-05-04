@@ -85,7 +85,6 @@ class PostResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('Category')->relationship('category', 'name')
-
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

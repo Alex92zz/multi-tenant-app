@@ -15,6 +15,9 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Services\FencingPageController;
 use App\Http\Controllers\Services\TarmacSurfacingController;
 use App\Http\Controllers\Services\TurfingPageController;
+use App\Filament\Resources\UserResource\Pages\ListUsers;
+use App\Filament\Resources\UserResource\Pages\CreateUser;
+use App\Filament\Resources\UserResource\Pages\EditUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +35,7 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::get('/', [HomePageController::class, 'index'])->name('home');
+
 
 
 /* ------------------------------- About Pages ------------------------------*/
@@ -100,3 +104,4 @@ Route::post('contact-form/submit', [ContactFormController::class, 'submit'])->na
 /* --------------------------------  Register  ------------------------------------- */
 Route::get('/admin/register', [RegisterController::class, 'showRegistrationForm'])->name('register-page');
 Route::post('/admin/register', [RegisterController::class, 'register'])->name('register');
+

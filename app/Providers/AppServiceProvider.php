@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Filament\Pages\Converter;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\LocalSEO;
 use App\Models\Project;
+use Filament\Forms\Contracts\HasForms;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Spatie\Health\Checks\Checks\DatabaseCheck;
@@ -32,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(HasForms::class, Converter::class);
     }
 
     /**

@@ -55,6 +55,6 @@ public function register(Request $request)
     ]);
 
     // Redirect to home if registration is successful
-    return redirect('/admin');
+    return redirect('/admin/login');
 }
 }
