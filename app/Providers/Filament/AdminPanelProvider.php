@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\HealthCheckResults;
+use App\Filament\Pages\AppBackups;
 use BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalyticsPlugin;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
@@ -61,8 +62,13 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
-            ->plugin(FilamentSpatieLaravelHealthPlugin::make())
-            ->plugin(FilamentSpatieLaravelBackupPlugin::make())
+            ->plugin(
+                FilamentSpatieLaravelHealthPlugin::make()
+                    ->usingPage(HealthCheckResults::class)
+            )
+            ->plugin(FilamentSpatieLaravelBackupPlugin::make()
+                ->usingPage(AppBackups::class)
+            )
             ->plugin(FilamentShieldPlugin::make())
             ->databaseNotifications()
             ->middleware([
@@ -76,6 +82,7 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->favicon(asset('assets/imgs/logo/browser-logo.jpg'))
             ->authMiddleware([
                 Authenticate::class,
             ]);

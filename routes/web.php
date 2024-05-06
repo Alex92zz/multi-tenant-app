@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\Services\BlockPavingPageController;
 use App\Http\Controllers\BlogPageController;
 
@@ -105,3 +106,6 @@ Route::post('contact-form/submit', [ContactFormController::class, 'submit'])->na
 Route::get('/admin/register', [RegisterController::class, 'showRegistrationForm'])->name('register-page');
 Route::post('/admin/register', [RegisterController::class, 'register'])->name('register');
 
+Route::group(['middleware' => ['role:super_admin']], function () {
+    Route::get('/download/{filename}', [DownloadController::class, 'download'])->name('download');
+});

@@ -14,18 +14,22 @@ use Filament\Pages\Page;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Log;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 
 class Converter extends Page implements HasForms
 {
     use WithFileUploads;
     use InteractsWithForms;
+    use HasPageShield;
 
     public $attachment;
     protected static ?string $navigationIcon = 'heroicon-o-calculator';
 
     protected static string $view = 'filament.pages.converter';
 
+    protected static ?string $navigationLabel  = '1 minute to 15 minute';
 
+    protected static ?string $navigationGroup = 'Converter';
     public function mount(): void
     {
         $this->form->fill();
@@ -33,14 +37,15 @@ class Converter extends Page implements HasForms
 
     public function form(Form $form): Form
     {
-        $currentDateTime = now();
-        
+
         return $form
             ->schema([
-                Card::make()->schema([
+                Card::make()
+                ->schema([
                     FileUpload::make('attachment')
-                    ->visibility('private')
-                    ->directory('conversion-inputs'),
+                    ->label(__('1 minute to 15 minute converter'))
+                        ->visibility('private')
+                        ->directory('conversion-inputs'),
                 ]),
             ]);
     }
@@ -113,7 +118,7 @@ class Converter extends Page implements HasForms
         // Generate a unique filename based on the current date and time
         $filename = '1_minute_to_15_minute_conversion_' . $currentDateTime->format('Ymd_His') . '.csv';
         // Construct the output file path
-        $outputFilePath = public_path('conversion-outputs/' . $filename);
+        $outputFilePath = storage_path('app/conversion-outputs/' . $filename);
 
         // Write data to a new CSV file with averages
         $output = fopen($outputFilePath, 'x');
@@ -124,10 +129,8 @@ class Converter extends Page implements HasForms
         }
         fclose($output);
 
-        Notification::make()
-            ->success()
-            ->title(__('filament-panels::resources/pages/edit-record.notifications.saved.title'))
-            ->send();
+
+        return redirect()->route('download', ['filename' => $filename]);
     }
 
 

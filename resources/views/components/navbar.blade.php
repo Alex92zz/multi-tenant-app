@@ -51,6 +51,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('contact') }}"><span class="rolling-text">Contact</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../admin/login"><span class="rolling-text">Account</span></a>
+                    </li>
                 </ul>
             </div>
 
