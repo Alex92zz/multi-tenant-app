@@ -22,7 +22,7 @@ class SitemapResource extends Resource
 
     protected static ?string $navigationLabel  = 'Sitemap';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Website';
 
     protected static ?string $navigationIcon = 'heroicon-o-link';
 

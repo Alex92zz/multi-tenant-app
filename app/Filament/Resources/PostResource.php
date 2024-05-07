@@ -57,7 +57,6 @@ class PostResource extends Resource
                     TextInput::make('slug')
                         ->required(),
                     FileUpload::make('thumbnail')
-                    ->optimize('webp')
                         ->directory('/images/blog-posts')
                          ->required(),
                     RichEditor::make('content')->required()->disableToolbarButtons([

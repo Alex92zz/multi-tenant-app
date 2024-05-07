@@ -48,6 +48,7 @@ class UserResource extends Resource
 
         // Build the select field with allowed roles
         $selectField = Select::make('roles')
+            ->relationship('roles', 'name')
             ->options($rolesFromModel)
             ->preload();
 

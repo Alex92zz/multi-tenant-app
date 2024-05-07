@@ -3,25 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EmployeeLeaveRequestResource\Pages;
-use App\Filament\Resources\EmployeeLeaveRequestResource\RelationManagers;
 use App\Models\EmployeeLeaveRequest;
-use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 class EmployeeLeaveRequestResource extends Resource
@@ -38,43 +30,46 @@ class EmployeeLeaveRequestResource extends Resource
             ->schema([
                 Card::make()->schema([
                     TextInput::make('full_name')
-                    ->label('Full Name')
-                    ->required(),
+                        ->label('Full Name')
+                        ->required(),
                     TextInput::make('email')
-                    ->email()
-                    ->required(),
+                        ->email()
+                        ->required(),
                     TextInput::make('contact_number')
-                    ->tel()
-                    ->required(),
+                        ->tel()
+                        ->required(),
                     Select::make('leave_type')
-                    ->options([
-                        'Medical' => 'Medical',
-                        'Vacation' => 'Vacation',
-                        'General' => 'General',
-                        'Maternity' => 'Maternity',
-                        'Compassionate' => 'Compassionate',
-                    ])
-                    ->required(),
+                        ->options([
+                            'Medical' => 'Medical',
+                            'Vacation' => 'Vacation',
+                            'General' => 'General',
+                            'Maternity' => 'Maternity',
+                            'Compassionate' => 'Compassionate',
+                        ])
+                        ->required(),
                     DatePicker::make('from_date')
-                    ->required()
-                    ->minDate(today()),
+                        ->required()
+                        ->minDate(today()),
                     DatePicker::make('to_date')
-                    ->required()
-                    ->rules(['after_or_equal:from_date'])
-                    ->minDate('from_date'),
+                        ->required()
+                        ->rules(['after_or_equal:from_date'])
+                        ->minDate('from_date'),
                     TextInput::make('total_days')
-                    ->label('Total days')
-                    ->required(),
+                        ->label('Total days')
+                        ->required(),
                     Textarea::make('comments'),
                     SignaturePad::make('signature')
-                    ->required(),
+                        ->required(),
                 ])
             ]);
     }
 
     public static function table(Table $table): Table
     {
+        //$user = auth()->user();
+
         return $table
+            //->query(fn(Builder $query) => $query->where('id', $user->id))
             ->columns([
                 TextColumn::make('full_name')->limit('50')->sortable()->searchable(),
                 TextColumn::make('leave_type')->sortable()->limit('50'),
@@ -98,14 +93,14 @@ class EmployeeLeaveRequestResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -113,5 +108,5 @@ class EmployeeLeaveRequestResource extends Resource
             'create' => Pages\CreateEmployeeLeaveRequest::route('/create'),
             'edit' => Pages\EditEmployeeLeaveRequest::route('/{record}/edit'),
         ];
-    }    
+    }
 }

@@ -33,8 +33,12 @@ class AdminPanelProvider extends PanelProvider
         return $panel
         ->navigationGroups([
             NavigationGroup::make()
-            ->label('Website')
+            ->label('Verification Forms')
             ->collapsed(),
+            NavigationGroup::make()
+            ->label('Converter')
+            ->collapsed(),
+            
             NavigationGroup::make()
             ->label('Employees')
             ->collapsed(),
@@ -43,6 +47,9 @@ class AdminPanelProvider extends PanelProvider
             ->collapsed(),
             NavigationGroup::make()
             ->label('User Management')
+            ->collapsed(),
+            NavigationGroup::make()
+            ->label('Website')
             ->collapsed(),
         ])
             ->default()
