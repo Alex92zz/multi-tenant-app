@@ -25,6 +25,18 @@ class ContactFormController extends Controller
     if ($request->input('last_name')){
         return response()->json(['error' => 'Our system detected that you are a bot. In case you are a human get in touch with us and report this error.'], 400);
     }
+
+    // Check if email ends with ".ru"
+    $email = $request->input('email');
+    $endingThree = substr($email, -3); // Get last 4 characters
+    if ($endingThree === ".ru") {
+        return response()->json(['error' => 'error'], 400);
+    }
+
+    $endingFour = substr($email, -4); // Get last 4 characters
+    if ($endingFour === "lick" || $endingFour === "mail" || $endingFour === "tore" || $endingFour === "line") {
+        return response()->json(['error' => 'error'], 400);
+    }
         
          // Verify reCAPTCHA
         $recaptchaSecretKey = env('RECAPTCHA_SECRET_KEY');

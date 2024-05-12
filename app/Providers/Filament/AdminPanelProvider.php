@@ -69,13 +69,6 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
-            ->plugin(
-                FilamentSpatieLaravelHealthPlugin::make()
-                    ->usingPage(HealthCheckResults::class)
-            )
-            ->plugin(FilamentSpatieLaravelBackupPlugin::make()
-                ->usingPage(AppBackups::class)
-            )
             ->plugin(FilamentShieldPlugin::make())
             ->databaseNotifications()
             ->middleware([

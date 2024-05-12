@@ -20,31 +20,33 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Log;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 
-class Converter extends Page implements HasForms
+class ConverterTwoMeters extends Page implements HasForms
 {
     use WithFileUploads;
     use InteractsWithForms;
     use HasPageShield;
+    protected static ?string $model = CompletedConversion::class;
+    
 
-    protected static ?string $model = CompletedConversion::class;    
-    public $attachment;
-
+    protected static string $view = 'filament.pages.converter-two-meters';
     protected static ?string $navigationIcon = 'heroicon-o-calculator';
 
-    protected static string $view = 'filament.pages.converter';
-
-    protected static ?string $navigationLabel = '1 Meter: 1min to 15min';
+    protected static ?string $navigationLabel = '2 Meters: 1min to 15min';
 
     protected static ?string $navigationGroup = 'Converter';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
     public function mount(): void
     {
         $this->form->fill();
     }
 
+    public $attachment;
+    public $attachmentTwo;
     public $formData = [];
+    public $formDataTwo = [];
     public $start_time_for_conversion = '';
+    public $start_time_for_conversion_two = '';
 
     public function form(Form $form): Form
     {
@@ -54,11 +56,18 @@ class Converter extends Page implements HasForms
                 Card::make()
                     ->schema([
                         FileUpload::make('attachment')
-                            ->label(__('1 Minute to 15 Minute converter for 1 Meter'))
+                            ->label(__('1 Minute to 15 Minute converter for Meter 1'))
                             ->directory('conversion-inputs')
                             ->afterStateUpdated(fn() => $this->getData('attachment')), // Trigger getData after state update
                         Select::make('start_time_for_conversion')
                             ->options(fn() => $this->formData)
+                            ->required(),
+                        FileUpload::make('attachmentTwo')
+                            ->label(__('1 Minute to 15 Minute converter for Meter 2'))
+                            ->directory('conversion-inputs')
+                            ->afterStateUpdated(fn() => $this->getData('attachmentTwo')), // Trigger getData after state update
+                        Select::make('start_time_for_conversion_two')
+                            ->options(fn() => $this->formDataTwo)
                             ->required(),
                     ]),
             ]);
@@ -108,7 +117,12 @@ class Converter extends Page implements HasForms
 
                 if ($rowCounter < 50) {
                     // Add each row to formData
-                    $this->formData[$rowCounter] = $row[0];
+                    if ($fileKey === 'attachment') {
+                        $this->formData[$rowCounter] = $row[0];
+                    } elseif ($fileKey === 'attachmentTwo') {
+                        $this->formDataTwo[$rowCounter] = $row[0];
+                    }
+
                 }
 
 
@@ -129,12 +143,50 @@ class Converter extends Page implements HasForms
         $data = $this->form->getState();
 
         $startTimeForConversion = basename(public_path($data['start_time_for_conversion']));
-        Log::info('Start time for conversion: ' . $startTimeForConversion);
+        $startTimeForConversionTwo = basename(public_path($data['start_time_for_conversion_two']));
 
         // Get the file path from the public folder
         $file = public_path($data['attachment']);
+        $fileTwo = public_path($data['attachmentTwo']);
+
+        $averages = $this->processFile($file, $startTimeForConversion);
+
+        
+
+
+
+        $currentDateTime = now();
+
+        // Generate a unique filename based on the current date and time
+        $filename = '1_minute_to_15_minute_conversion_' . $currentDateTime->format('Ymd_His') . '.csv';
+        // Construct the output file path
+        $outputFilePath = storage_path('app/conversion-outputs/' . $filename);
+
+        // Write data to a new CSV file with averages
+        $output = fopen($outputFilePath, 'x');
+
+        foreach ($averages as $dateTime => $average) {
+            $data = [$dateTime, $average];
+            fputcsv($output, $data);
+        }
+        fclose($output);
+
+        // Add record to completed_conversions table
+        $userId = Auth::id();
+        CompletedConversion::create([
+            'user_id' => $userId,
+            'url' => $filename,
+            'conversion_description' => '1min to 15min conversion for 1 Meter'
+        ]);
+
+        return redirect()->route('download', ['filename' => $filename]);
+    }
+
+
+    public function processFile($file, $startTimeForConversion){
 
         $data = array_map('str_getcsv', file($file));
+        $dataTwo = array_map('str_getcsv', file($file));
 
         $averages = [];
         $sum = 0.00;
@@ -225,31 +277,7 @@ class Converter extends Page implements HasForms
         $numberFormatted = number_format($average, 2);
         $averages[$dateTime->format('d/m/Y H:i')] = $numberFormatted;
 
-        $currentDateTime = now();
-
-        // Generate a unique filename based on the current date and time
-        $filename = '1_minute_to_15_minute_conversion_' . $currentDateTime->format('Ymd_His') . '.csv';
-        // Construct the output file path
-        $outputFilePath = storage_path('app/conversion-outputs/' . $filename);
-
-        // Write data to a new CSV file with averages
-        $output = fopen($outputFilePath, 'x');
-
-        foreach ($averages as $dateTime => $average) {
-            $data = [$dateTime, $average];
-            fputcsv($output, $data);
-        }
-        fclose($output);
-
-        // Add record to completed_conversions table
-        $userId = Auth::id();
-        CompletedConversion::create([
-            'user_id' => $userId,
-            'url' => $filename,
-            'conversion_description' => '1min to 15min conversion for 1 Meter'
-        ]);
-
-        return redirect()->route('download', ['filename' => $filename]);
+        return $averages;
     }
 
 

@@ -36,6 +36,7 @@
                                 <div class="form-group mb-30">
                                     <input id="first_name" type="text" name="first_name" placeholder="Name"
                                         required="required" minlength="4" maxlength="30">
+                                        <input type="text" name="last_name" style="display: none;">
                                 </div>
                             </div>
 

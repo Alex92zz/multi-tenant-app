@@ -39,7 +39,7 @@ class UserResource extends Resource
             'super_admin' => ['employee'],
             'employee' => ['super_admin', 'unassigned'],
             'client' => ['unassigned'],
-            'unassigned' => ['employee', 'client'],
+            'unassigned' => ['employee', 'client', 'client_detection_services'],
             default => ['unassigned'],
         };
 

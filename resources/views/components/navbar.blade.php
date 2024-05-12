@@ -51,9 +51,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('contact') }}"><span class="rolling-text">Contact</span></a>
                     </li>
+                    @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="../admin/login"><span class="rolling-text">Account</span></a>
+                        <a class="nav-link" href="../admin/login"><span class="rolling-text">Dashboard</span></a>
                     </li>
+                    @endauth
                 </ul>
             </div>
 

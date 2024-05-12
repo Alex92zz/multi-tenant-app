@@ -57,13 +57,5 @@ class AppServiceProvider extends ServiceProvider
                 'localSEOs' => $localSEOs
             ]);
         });
-
-        Health::checks([
-            DebugModeCheck::new(),
-            DatabaseCheck::new(),
-            DatabaseConnectionCountCheck::new(),
-            DatabaseSizeCheck::new(),
-            DatabaseTableSizeCheck::new(),
-        ]);
     }
 }
