@@ -55,6 +55,7 @@ class Converter extends Page implements HasForms
                     ->schema([
                         FileUpload::make('attachment')
                             ->label(__('1 Minute to 15 Minute converter for 1 Meter'))
+                            ->acceptedFileTypes(['text/csv'])
                             ->directory('conversion-inputs')
                             ->afterStateUpdated(fn() => $this->getData('attachment')), // Trigger getData after state update
                         Select::make('start_time_for_conversion')

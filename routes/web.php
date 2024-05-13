@@ -106,6 +106,6 @@ Route::post('contact-form/submit', [ContactFormController::class, 'submit'])->na
 Route::get('/admin/register', [RegisterController::class, 'showRegistrationForm'])->name('register-page');
 Route::post('/admin/register', [RegisterController::class, 'register'])->name('register');
 
-Route::group(['middleware' => ['role:super_admin']], function () {
+Route::group(['middleware' => ['role:super_admin|employee']], function () {
     Route::get('/download/{filename}', [DownloadController::class, 'download'])->name('download');
 });

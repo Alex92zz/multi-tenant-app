@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'employee' => [
+            'driver' => 'session', // or choose the appropriate driver
+            'provider' => 'employees', // define your provider for employees
+        ],
     ],
 
     /*

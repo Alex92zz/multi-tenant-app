@@ -31,11 +31,18 @@ class CompletedConversionResource extends Resource
     protected static ?int $navigationSort = 1;
 
 
-
     public static function getEloquentQuery(): Builder
     {
-        $user = auth()->user()->id;
-        return static::getModel()::query()->where('user_id', $user);
+        $user = auth()->user();
+
+        // Check if the user is not a super_admin
+        if (!$user->hasRole('super_admin')) {
+            // If the user is not a super_admin, apply the query restriction
+            return static::getModel()::query()->where('user_id', $user->id);
+        }
+
+        // If the user is a super_admin, return the query without any restriction
+        return static::getModel()::query();
     }
 
     public static function table(Table $table): Table
@@ -43,15 +50,15 @@ class CompletedConversionResource extends Resource
 
         return $table
             ->columns([
-                TextColumn::make('user.name')->limit('50')
+                TextColumn::make('user.name')
+                    ->limit('50')
                     ->label('User Name')
-                    ->sortable()
                     ->searchable(),
                 TextColumn::make('conversion_description')->limit('50')->searchable(),
                 TextColumn::make('updated_at')
                     ->limit('50')
                     ->sortable()
-                    ->date('H:m, j-M-Y'),
+                    ->date('H:m, j M'),
             ])
             ->filters([
                 //
@@ -59,14 +66,14 @@ class CompletedConversionResource extends Resource
             ->actions([
                 //Tables\Actions\EditAction::make(),
                 Action::make('download')
-                ->label('Download')
-                ->color('success')
-                ->icon('heroicon-o-arrow-down-circle')
-                ->url(function ($record) {
-                    return route('download', ['filename' => $record->url]); // Assuming $record has a 'filename' attribute
-                }),
+                    ->label('Download')
+                    ->color('success')
+                    ->icon('heroicon-o-arrow-down-circle')
+                    ->url(function ($record) {
+                        return route('download', ['filename' => $record->url]); // Assuming $record has a 'filename' attribute
+                    }),
                 Tables\Actions\DeleteAction::make(),
-                
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

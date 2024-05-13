@@ -57,6 +57,7 @@ class ConverterTwoMeters extends Page implements HasForms
                     ->schema([
                         FileUpload::make('attachment')
                             ->label(__('1 Minute to 15 Minute converter for Meter 1'))
+                            ->acceptedFileTypes(['text/csv'])
                             ->directory('conversion-inputs')
                             ->afterStateUpdated(fn() => $this->getData('attachment')), // Trigger getData after state update
                         Select::make('start_time_for_conversion')
@@ -64,6 +65,7 @@ class ConverterTwoMeters extends Page implements HasForms
                             ->required(),
                         FileUpload::make('attachmentTwo')
                             ->label(__('1 Minute to 15 Minute converter for Meter 2'))
+                            ->acceptedFileTypes(['text/csv'])
                             ->directory('conversion-inputs')
                             ->afterStateUpdated(fn() => $this->getData('attachmentTwo')), // Trigger getData after state update
                         Select::make('start_time_for_conversion_two')

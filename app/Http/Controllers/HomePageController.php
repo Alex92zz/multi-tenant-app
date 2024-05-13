@@ -11,9 +11,6 @@ class HomePageController extends Controller
     public function index()
     {
 
-        $recentProjects = Project::latest()
-            ->take(6)
-            ->get();
         $recentPosts = Post::latest()
             ->take(3)
             ->get();
