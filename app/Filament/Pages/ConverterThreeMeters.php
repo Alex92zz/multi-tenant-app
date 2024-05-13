@@ -20,22 +20,22 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Log;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 
-class ConverterTwoMeters extends Page implements HasForms
+class ConverterThreeMeters extends Page implements HasForms
 {
     use WithFileUploads;
     use InteractsWithForms;
     use HasPageShield;
+
     protected static ?string $model = CompletedConversion::class;
-
-
     protected static string $view = 'filament.pages.converter-two-meters';
     protected static ?string $navigationIcon = 'heroicon-o-calculator';
 
-    protected static ?string $navigationLabel = '2 Meters: 1min to 15min';
+    protected static ?string $navigationLabel = '3 Meters: 1min to 15min';
 
     protected static ?string $navigationGroup = 'Converter';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
+
     public function mount(): void
     {
         $this->form->fill();
@@ -43,10 +43,13 @@ class ConverterTwoMeters extends Page implements HasForms
 
     public $attachment;
     public $attachmentTwo;
+    public $attachmentThree;
     public $formData = [];
     public $formDataTwo = [];
+    public $formDataThree = [];
     public $start_time_for_conversion = '';
     public $start_time_for_conversion_two = '';
+    public $start_time_for_conversion_three = '';
 
     public function form(Form $form): Form
     {
@@ -69,9 +72,17 @@ class ConverterTwoMeters extends Page implements HasForms
                         Select::make('start_time_for_conversion_two')
                             ->options(fn() => $this->formDataTwo)
                             ->required(),
+                        FileUpload::make('attachmentThree')
+                            ->label(__('1 Minute to 15 Minute converter for Meter 3'))
+                            ->directory('conversion-inputs')
+                            ->afterStateUpdated(fn() => $this->getData('attachmentThree')), // Trigger getData after state update
+                        Select::make('start_time_for_conversion_three')
+                            ->options(fn() => $this->formDataThree)
+                            ->required(),
                     ]),
             ]);
     }
+
 
     protected function getFormActions(): array
     {
@@ -122,6 +133,9 @@ class ConverterTwoMeters extends Page implements HasForms
                     } elseif ($fileKey === 'attachmentTwo') {
                         $this->formDataTwo[$rowCounter] = $row[0];
                     }
+                    elseif ($fileKey === 'attachmentThree') {
+                        $this->formDataThree[$rowCounter] = $row[0];
+                    }
 
                 }
 
@@ -138,18 +152,20 @@ class ConverterTwoMeters extends Page implements HasForms
 
     public function handle(Form $form)
     {
-        Log::info('Handle function started.');
         $data = $this->form->getState();
 
         $startTimeForConversion = basename(public_path($data['start_time_for_conversion']));
         $startTimeForConversionTwo = basename(public_path($data['start_time_for_conversion_two']));
+        $startTimeForConversionThree = basename(public_path($data['start_time_for_conversion_three']));
 
         // Get the file path from the public folder
         $file = public_path($data['attachment']);
         $fileTwo = public_path($data['attachmentTwo']);
+        $fileThree = public_path($data['attachmentThree']);
 
         $averages = $this->processFile($file, $startTimeForConversion);
         $averagesTwo = $this->processFile($fileTwo, $startTimeForConversionTwo);
+        $averagesThree = $this->processFile($fileThree, $startTimeForConversionThree);
 
         $currentDateTime = now();
 
@@ -174,7 +190,17 @@ class ConverterTwoMeters extends Page implements HasForms
 
         // Write $averagesTwo to columns 4 and 5 starting from row 0
         foreach ($averagesTwo as $dateTime => $average) {
-            $data = [ '', '', '', $dateTime, $average];
+            $data = ['', '', '', $dateTime, $average];
+            fputcsv($output, $data, ',', '"', ($rowIndex < 2) ? $rowIndex : null);
+            $rowIndex++;
+        }
+
+        // Reset the row index for $averagesTwo
+        $rowIndex = 0;
+
+        // Write $averagesTwo to columns 4 and 5 starting from row 0
+        foreach ($averagesThree as $dateTime => $average) {
+            $data = ['', '', '', '', '', '', $dateTime, $average];
             fputcsv($output, $data, ',', '"', ($rowIndex < 2) ? $rowIndex : null);
             $rowIndex++;
         }
@@ -186,7 +212,7 @@ class ConverterTwoMeters extends Page implements HasForms
         CompletedConversion::create([
             'user_id' => $userId,
             'url' => $filename,
-            'conversion_description' => '1min to 15min conversion for 2 Meters'
+            'conversion_description' => '1min to 15min conversion for 3 Meters'
         ]);
 
         return redirect()->route('download', ['filename' => $filename]);
@@ -197,7 +223,6 @@ class ConverterTwoMeters extends Page implements HasForms
     {
 
         $data = array_map('str_getcsv', file($file));
-        $dataTwo = array_map('str_getcsv', file($file));
 
         $averages = [];
         $sum = 0.00;
@@ -205,7 +230,6 @@ class ConverterTwoMeters extends Page implements HasForms
         $previousDateTime = null;
         $loopStartDateTime = null;
         $rowCounter = 0;
-        $firstDateTimeAndFlow = [];
 
         foreach ($data as $row) {
             $rowCounter++;
@@ -228,7 +252,6 @@ class ConverterTwoMeters extends Page implements HasForms
 
             //getting the first value because that one doesn't need to be calculated for average
             if ($rowCounter == ($startTimeForConversion)) {
-                Log::info('if $rowCounter === $startTimeForConversion, meaning first row: ' . $startTimeForConversion);
                 $averages[Carbon::createFromFormat('d/m/Y H:i', $row[0])->toDateTimeString()] = floatval($row[1]);
                 continue;
             }
@@ -247,9 +270,6 @@ class ConverterTwoMeters extends Page implements HasForms
 
                 $dateTime = Carbon::createFromFormat('d/m/Y H:i', $row[0]);
                 $flow = floatval($row[1]);
-                Log::info("rowCounter: " . $rowCounter);
-                Log::info("dataTime received, date: " . $dateTime);
-                Log::info("flow received, flow: " . $flow);
 
                 if ($previousDateTime == null) {
                     $previousDateTime = $dateTime;
@@ -258,10 +278,7 @@ class ConverterTwoMeters extends Page implements HasForms
 
                 if ($dateTime->diffInMinutes($loopStartDateTime) == 15) {
 
-                    Log::info("sum: " . $sum);
-                    Log::info("count: " . $count);
                     $average = $sum / $count;
-                    Log::info("average, mening sum / count: " . $average);
                     $numberFormatted = number_format($average, 2);
                     $averages[$previousDateTime->format('d/m/Y H:i')] = $numberFormatted;
 
@@ -270,10 +287,6 @@ class ConverterTwoMeters extends Page implements HasForms
                     $count = 0;
                     $loopStartDateTime = $dateTime;
                 }
-
-                Log::info("count: " . $count);
-                Log::info("flow: " . $flow);
-                Log::info("sum: " . $sum);
 
                 $sum += $flow;
                 $count += 1;
@@ -290,6 +303,4 @@ class ConverterTwoMeters extends Page implements HasForms
 
         return $averages;
     }
-
-
 }
