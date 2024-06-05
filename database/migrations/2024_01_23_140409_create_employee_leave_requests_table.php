@@ -22,7 +22,7 @@ return new class extends Migration
         $table->date('to_date');
         $table->integer('total_days');
         $table->text('comments')->nullable();
-        $table->string('signature',4000); // Assuming the signature is stored as a file path or filename
+        $table->mediumText('signature'); // Assuming the signature is stored as a file path or filename
     });
 }
 

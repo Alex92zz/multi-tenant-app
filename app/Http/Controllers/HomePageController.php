@@ -15,6 +15,6 @@ class HomePageController extends Controller
             ->take(3)
             ->get();
 
-        return view('index', compact('recentPosts', 'recentProjects'));
+        return view('index', compact('recentPosts'));
     }
 }

@@ -11,6 +11,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -50,6 +51,10 @@ class CompletedConversionResource extends Resource
 
         return $table
             ->columns([
+                ImageColumn::make('user.image_url')
+                ->label('Avatar')
+                ->size(50)
+                ->circular(),
                 TextColumn::make('user.name')
                     ->limit('50')
                     ->label('User Name')
@@ -58,7 +63,7 @@ class CompletedConversionResource extends Resource
                 TextColumn::make('updated_at')
                     ->limit('50')
                     ->sortable()
-                    ->date('H:m, j M'),
+                    ->date('H:i, j M'),
             ])
             ->filters([
                 //

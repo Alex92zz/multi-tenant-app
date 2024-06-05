@@ -745,7 +745,7 @@
                                                     <span
                                                         class="text-sm font-medium leading-6 text-gray-950 dark:text-white">
 
-                                                        Name<sup
+                                                        Full Name<sup
                                                             class="text-danger-600 dark:text-danger-400 font-medium">*</sup>
                                                     </span>
                                                     @error('name')

@@ -10,6 +10,7 @@ use Filament\Forms\Components\Card;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -65,7 +66,13 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->limit('50')->searchable(),
+                ImageColumn::make('image_url')
+                ->label('Avatar')
+                ->size(50)
+                ->circular(),
+                TextColumn::make('name')->limit('30')->searchable(),
+                TextColumn::make('email')->limit('50')->searchable(),
+                TextColumn::make('phone_number')->limit('50'),
                 TextColumn::make('role')
                     ->limit('50')
                     ->sortable()

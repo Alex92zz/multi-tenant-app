@@ -156,4 +156,10 @@ class MeterVerificationTest extends Model
         't2_mut_minus_mm_average',
         't2_mut_minus_mm_average_percent',
      ];
+
+     public function user()
+     {
+        return $this->belongsTo(User::class);
+     }
+     
 }

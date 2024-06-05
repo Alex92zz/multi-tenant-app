@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\Scopes\RoleScope;
 use Spatie\Permission\Traits\HasRoles;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -21,8 +22,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone_number',
         'password',
+        'image_url',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -52,5 +56,15 @@ class User extends Authenticatable
     public function completedConversion()
     {
         return $this->hasMany(CompletedConversion::class);
+    }
+
+    public function meterVerificationTest()
+    {
+        return $this->belongsTo(MeterVerificationTest::class);
+    }
+
+    public function meterAbortReport()
+    {
+        return $this->belongsTo(MeterAbortReport::class);
     }
 }

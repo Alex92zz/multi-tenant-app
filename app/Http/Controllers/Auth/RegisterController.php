@@ -37,9 +37,9 @@ class RegisterController extends Controller
             return redirect()->back()->withInput()->withErrors(['email' => 'Email already exists.']);
         }
 
-        // Check if the secret code is "alex"
+        // Check if the secret code is correct
         if ($request->password !== $request->confirm_password) {
-            // If secret code is not "alex", redirect back with an error message
+            // If secret code is not correct, redirect back with an error message
             return redirect()->back()->withInput()->withErrors(['confirm_password' => 'Confirmed password has to be the same as password']);
         }
 
@@ -55,6 +55,7 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'image_url' => 'images/admin_dashboard/users/default-avatar.jpg',
             'password' => Hash::make($request->password),
         ]);
 

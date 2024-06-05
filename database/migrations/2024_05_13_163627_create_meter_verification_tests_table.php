@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('fmv_reference_number', 50)->nullable();
             $table->string('site_reference', 50)->nullable();
             $table->string('telemetry_reference', 50)->nullable();
+            //date
             $table->string('field_team', 50)->nullable();
             $table->text('site_manager_name')->nullable();
             $table->text('site_manager_email')->nullable();
@@ -28,6 +29,7 @@ return new class extends Migration {
             $table->text('site_contact_email')->nullable();
             $table->text('site_contact_number')->nullable();
             $table->boolean('confined_spaces')->nullable();
+
             $table->text('site_address')->nullable();
             $table->text('w3w')->nullable();
             $table->text('gprs')->nullable();
