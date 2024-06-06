@@ -28,6 +28,11 @@ class MeterVerificationTest extends Model
         'site_address',
         'w3w',
         'gprs',
+
+        'lat',
+        'lng',
+        'any_name',
+
         'rams_checked',
         'chamber_safety_check_completed',
         'tripod_fall_arrest_safety_check_completed',
@@ -161,5 +166,14 @@ class MeterVerificationTest extends Model
      {
         return $this->belongsTo(User::class);
      }
+
+
+     public static function getLatLngAttributes(): array
+    {
+        return [
+            'lat' => 'lat',  // Replace 'latitude' with the actual field name for latitude in your table
+            'lng' => 'lng', // Replace 'longitude' with the actual field name for longitude in your table
+        ];
+    }
      
 }

@@ -4,6 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MeterVerificationTestResource\Pages;
 use App\Models\MeterVerificationTest;
+use Cheesegrits\FilamentGoogleMaps\Concerns\InteractsWithMaps;
+use Cheesegrits\FilamentGoogleMaps\Fields\Geocomplete;
+use Cheesegrits\FilamentGoogleMaps\Fields\Map;
+use Filament\Actions\Action;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Fieldset;
@@ -27,17 +31,66 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Filament\Forms\Components\TagsInput;
+use App\Models\User;
+use What3words\Geocoder\Geocoder;
+use What3words\Geocoder\AutoSuggestOption;
+use Filament\Forms\Set;
 
 class MeterVerificationTestResource extends Resource
 {
+
+    use InteractsWithMaps;
     protected static ?string $model = MeterVerificationTest::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     protected static ?string $navigationGroup = 'Verification Forms';
 
+    protected static $lng;
+    protected static $lat;
+
+
+    // Setter for lng property
+    public static function setLng($lng)
+    {
+        static::$lng = $lng;
+    }
+
+    public static function setLat($lat)
+    {
+        static::$lat = $lat;
+    }
+
+    public static function getLng()
+    {
+        return static::$lng;
+    }
+
+    public static function getWhatThreeWords()
+    {
+        $lng = MeterVerificationTestResource::getLng();
+        Log::info('lng in function: ' . $lng);
+        $lat = MeterVerificationTestResource::getLat();
+        Log::info('lat in function: ' . $lat);
+        $api = new Geocoder("4JEMWPRY");
+
+        $result = $api->convertTo3wa('52.487521098871504', '-2.0612195122900085');
+
+        Log::info('Displayng what 3 words: ' . json_encode($result['words']));
+    }
+
+    public static function getLat()
+    {
+        return static::$lat;
+    }
+
     public static function form(Form $form): Form
     {
+
+        $users = User::all();
+        $userNames = $users->pluck('name');
 
         return $form
             ->schema([
@@ -68,8 +121,8 @@ class MeterVerificationTestResource extends Resource
                                         TextInput::make('telemetry_reference')
                                             ->maxLength(255),
 
-                                        TextInput::make('field_team')
-                                            ->maxLength(255),
+                                        TagsInput::make('field_team')
+                                            ->suggestions($userNames),
 
                                         TextInput::make('site_manager_name')
                                             ->maxLength(255),
@@ -98,19 +151,97 @@ class MeterVerificationTestResource extends Resource
                                     ->offIcon('heroicon-o-x-mark')
                                     ->onColor('success')
                                 ,
-                                Textarea::make('site_address')
-                                    ->maxLength(65535)
-                                    ->columnSpanFull(),
-                                Grid::make(2)
+
+                                Geocomplete::make('site_address')
+                                    ->prefix('Choose:')
+                                    ->reactive()
+                                    ->afterStateUpdated(function ($state, callable $get, callable $set) {
+                                        // This method is called every time the map marker is moved
+                                        Log::info('afterStateUpdated from Geocomplete: ' . json_encode($state));
+                                    })
+
+                                    ->placeholder('Start typing an address ...')
+                                    ->geolocate() // add a suffix button which requests and reverse geocodes the device location
+                                    ->geolocateIcon('heroicon-o-map')// override the default icon for the geolocate button
+                                    ->updateLatLng(),
+
+                                Grid::make(3)
                                     ->schema([
                                         TextInput::make('w3w')
                                             ->label('W3W')
                                             ->maxLength(255),
+                                            
+                                            TextInput::make('lat')
+                                            ->live()
+                                            ->numeric()
+                                            ->inputMode('decimal')
+                                            ->reactive()
+                                            ->label('GPRS lat')
+                                            ->afterStateUpdated(function ($state, callable $get, callable $set) {
+                                                Log::info('Lat State: ' . json_encode($state)); // Log the state to see its structure
+                                                MeterVerificationTestResource::setLat($state ?? ''); // Update lat property
+                                                Log::info('Updated lat: ' . MeterVerificationTestResource::getLat()); // Log updated lat
+                                                MeterVerificationTestResource::getWhatThreeWords();
+                                            }),
 
-                                        TextInput::make('gprs')
-                                            ->label('GPRS')
-                                            ->maxLength(255),
+                                            TextInput::make('lng')
+                                            ->live()
+                                            ->numeric()
+                                            ->inputMode('decimal')
+                                            ->reactive()
+                                            ->label('GPRS lng')
+                                            ->afterStateUpdated(function ($state, callable $get, callable $set) {
+                                                Log::info('Lng State: ' . json_encode($state)); // Log the state to see its structure
+                                                MeterVerificationTestResource::setLng($state ?? ''); // Update lng property
+                                                Log::info('Updated lng: ' . MeterVerificationTestResource::getLng()); // Log updated lng
+                                                MeterVerificationTestResource::getWhatThreeWords();
+                                            }),
+
+                                            
                                     ]),
+
+                                TextInput::make('any_name'),
+
+                                Map::make('location')
+                                    ->geoJson(function () {
+                                        return '{}';
+                                    })
+                                    ->geoJsonContainsField('any_name')
+                                    ->mapControls([
+                                        'mapTypeControl' => true,
+                                        'scaleControl' => true,
+                                        'streetViewControl' => true,
+                                        'rotateControl' => true,
+                                        'fullscreenControl' => true,
+                                        'searchBoxControl' => false, // creates geocomplete field inside map
+                                        'zoomControl' => true,
+                                    ])
+                                    ->geolocate()
+                                    ->reactive()
+                                    ->afterStateUpdated(function ($state, callable $get, callable $set) {
+                                        // This method is called every time the map marker is moved
+                                        Log::info('afterStateUpdated from map: ' . json_encode($state));
+                                        $set('lng', $state['lng']);
+                                        $set('lat', $state['lat']);
+                                    })
+
+                                    ->height(fn() => '400px') // map height (width is controlled by Filament options)
+                                    ->defaultZoom(5) // default zoom level when opening form
+                                    ->autocomplete('site_address') // field on form to use as Places geocompletion field
+                                    ->autocompleteReverse(true) // reverse geocode marker location to autocomplete field
+                                    ->reverseGeocode([
+                                        'street' => '%n %S',
+                                        'city' => '%L',
+                                        'state' => '%A1',
+                                        'zip' => '%z',
+                                    ]) // reverse geocode marker location to form fields, see notes below
+
+                                    ->draggable() // allow dragging to move marker
+                                    ->clickable(false) // allow clicking to move marker
+                                    ->geolocate() // adds a button to request device location and set map marker accordingly
+                                    ->geolocateLabel('Get Location') // overrides the default label for geolocate button
+                                    ->geolocateOnLoad(false, false), // geolocate on load, second arg 'always' (default false, only for new form))
+
 
                                 Fieldset::make('Have all safety checks been completed?')
                                     ->schema([
@@ -201,11 +332,11 @@ class MeterVerificationTestResource extends Resource
                                         Grid::make(3)
                                             ->schema([
                                                 Select::make('flow_conversion_value')
-                                                ->options([
-                                                    'option_1' => 'Option 1',
-                                                    'option_2' => 'Option 2',
-                                                    'option_3' => 'Option 3'
-                                                ]),
+                                                    ->options([
+                                                        'option_1' => 'Option 1',
+                                                        'option_2' => 'Option 2',
+                                                        'option_3' => 'Option 3'
+                                                    ]),
                                                 TextInput::make('client_mut_flow')
                                                     ->prefix('l/s')
                                                     ->label('Flow'),
@@ -214,22 +345,22 @@ class MeterVerificationTestResource extends Resource
                                                     ->label('Velocity'),
                                             ]),
                                         Select::make('total_forward_conversion_value')
-                                        ->label('Total forward > conversion value')
-                                        ->options([
-                                            'option_1' => 'Option 1',
-                                            'option_2' => 'Option 2',
-                                            'option_3' => 'Option 3'
-                                        ]),
+                                            ->label('Total forward > conversion value')
+                                            ->options([
+                                                'option_1' => 'Option 1',
+                                                'option_2' => 'Option 2',
+                                                'option_3' => 'Option 3'
+                                            ]),
                                         TextInput::make('client_mut_total_forward')
                                             ->prefix('m3')
                                             ->label('Total forward >'),
                                         Select::make('total_return_conversion_value')
-                                        ->label('Total return < conversion value')
-                                        ->options([
-                                            'option_1' => 'Option 1',
-                                            'option_2' => 'Option 2',
-                                            'option_3' => 'Option 3'
-                                        ]),
+                                            ->label('Total return < conversion value')
+                                            ->options([
+                                                'option_1' => 'Option 1',
+                                                'option_2' => 'Option 2',
+                                                'option_3' => 'Option 3'
+                                            ]),
                                         TextInput::make('client_mut_total_return')
                                             ->prefix('m3')
                                             ->label('Total return <'),
@@ -243,8 +374,8 @@ class MeterVerificationTestResource extends Resource
                                             ->prefix('l/s')
                                             ->label('Flow'),
                                         TextInput::make('fmv_mm1_velocity')
-                                                    ->prefix('m/s')
-                                                    ->label('Velocity'),
+                                            ->prefix('m/s')
+                                            ->label('Velocity'),
                                         TextInput::make('fmv_mm1_total')
                                             ->prefix('m3')
                                             ->label('Total'),
@@ -258,8 +389,8 @@ class MeterVerificationTestResource extends Resource
                                             ->prefix('l/s')
                                             ->label('Flow'),
                                         TextInput::make('fmv_mm2_velocity')
-                                                    ->prefix('m/s')
-                                                    ->label('Velocity'),
+                                            ->prefix('m/s')
+                                            ->label('Velocity'),
                                         TextInput::make('fmv_mm2_total')
                                             ->prefix('m3')
                                             ->label('Total'),
@@ -273,8 +404,8 @@ class MeterVerificationTestResource extends Resource
                                             ->prefix('l/s')
                                             ->label('Flow'),
                                         TextInput::make('fmv_mm3_velocity')
-                                                    ->prefix('m/s')
-                                                    ->label('Velocity'),
+                                            ->prefix('m/s')
+                                            ->label('Velocity'),
                                         TextInput::make('fmv_mm3_total')
                                             ->prefix('m3')
                                             ->label('Total'),
@@ -288,8 +419,8 @@ class MeterVerificationTestResource extends Resource
                                             ->prefix('l/s')
                                             ->label('Flow'),
                                         TextInput::make('fmv_mm4_velocity')
-                                                    ->prefix('m/s')
-                                                    ->label('Velocity'),
+                                            ->prefix('m/s')
+                                            ->label('Velocity'),
                                         TextInput::make('fmv_mm4_total')
                                             ->prefix('m3')
                                             ->label('Total'),
@@ -303,8 +434,8 @@ class MeterVerificationTestResource extends Resource
                                             ->prefix('l/s')
                                             ->label('Flow'),
                                         TextInput::make('fmv_mm_ave_velocity')
-                                                    ->prefix('m/s')
-                                                    ->label('Velocity'),
+                                            ->prefix('m/s')
+                                            ->label('Velocity'),
                                         TextInput::make('fmv_mm_ave_total')
                                             ->prefix('m3')
                                             ->label('Total'),
@@ -329,8 +460,8 @@ class MeterVerificationTestResource extends Resource
                                             ->prefix('l/s')
                                             ->label('Flow'),
                                         TextInput::make('client_mut_velocity_2')
-                                                    ->prefix('m/s')
-                                                    ->label('Velocity'),
+                                            ->prefix('m/s')
+                                            ->label('Velocity'),
                                         TextInput::make('client_mut_total_2')
                                             ->prefix('m3')
                                             ->label('Total'),
@@ -344,8 +475,8 @@ class MeterVerificationTestResource extends Resource
                                             ->prefix('l/s')
                                             ->label('Flow'),
                                         TextInput::make('fmv_mm1_velocity_2')
-                                                    ->prefix('m/s')
-                                                    ->label('Velocity'),
+                                            ->prefix('m/s')
+                                            ->label('Velocity'),
                                         TextInput::make('fmv_mm1_total_2')
                                             ->prefix('m3')
                                             ->label('Total'),
@@ -359,8 +490,8 @@ class MeterVerificationTestResource extends Resource
                                             ->prefix('l/s')
                                             ->label('Flow'),
                                         TextInput::make('fmv_mm2_velocity_2')
-                                                    ->prefix('m/s')
-                                                    ->label('Velocity'),
+                                            ->prefix('m/s')
+                                            ->label('Velocity'),
                                         TextInput::make('fmv_mm2_total_2')
                                             ->prefix('m3')
                                             ->label('Total'),
@@ -374,8 +505,8 @@ class MeterVerificationTestResource extends Resource
                                             ->prefix('l/s')
                                             ->label('Flow'),
                                         TextInput::make('fmv_mm3_velocity_2')
-                                                    ->prefix('m/s')
-                                                    ->label('Velocity'),
+                                            ->prefix('m/s')
+                                            ->label('Velocity'),
                                         TextInput::make('fmv_mm3_total_2')
                                             ->prefix('m3')
                                             ->label('Total'),
@@ -389,8 +520,8 @@ class MeterVerificationTestResource extends Resource
                                             ->prefix('l/s')
                                             ->label('Flow'),
                                         TextInput::make('fmv_mm4_velocity_2')
-                                                    ->prefix('m/s')
-                                                    ->label('Velocity'),
+                                            ->prefix('m/s')
+                                            ->label('Velocity'),
                                         TextInput::make('fmv_mm4_total_2')
                                             ->prefix('m3')
                                             ->label('Total'),
@@ -404,8 +535,8 @@ class MeterVerificationTestResource extends Resource
                                             ->prefix('l/s')
                                             ->label('Flow'),
                                         TextInput::make('fmv_mm_ave_velocity_2')
-                                                    ->prefix('m/s')
-                                                    ->label('Velocity'),
+                                            ->prefix('m/s')
+                                            ->label('Velocity'),
                                         TextInput::make('fmv_mm_ave_total_2')
                                             ->prefix('m3')
                                             ->label('Total'),
@@ -427,27 +558,47 @@ class MeterVerificationTestResource extends Resource
                             ]),
                         Step::make('FMV-Client Volume Totals')
                             ->schema([
-                                TextInput::make('mut_total_volume')
-                                    ->label('MUT Total Volume'),
+
+                                Fieldset::make('Client MUT Totals Forward > and Return <')
+                                    ->schema([
+                                        TextInput::make('client_mut_total_forward_conversion_selected')
+                                            ->label('Total Forward > conversion selected'),
+                                        TextInput::make('client_mut_total_forward_volume')
+                                            ->prefix('m3')
+                                            ->label('Client MUT Total Forward > volume'),
+                                        TextInput::make('client_mut_total_return_conversion_selected')
+                                            ->label('Total Return < conversion selected'),
+                                        TextInput::make('client_mut_total_return_volume')
+                                            ->prefix('m3')
+                                            ->label('Client MUT Total Return < volume'),
+                                    ])->columns(2),
+
 
                                 Fieldset::make()
                                     ->schema([
                                         TextInput::make('fmv_mm1_total_volume')
+                                            ->prefix('m3')
                                             ->label('FMV MM1 Total Volume'),
                                         TextInput::make('fmv_mm2_total_volume')
+                                            ->prefix('m3')
                                             ->label('FMV MM2 Total Volume'),
                                         TextInput::make('fmv_mm3_total_volume')
+                                            ->prefix('m3')
                                             ->label('FMV MM3 Total Volume'),
                                         TextInput::make('fmv_mm4_total_volume')
+                                            ->prefix('m3')
                                             ->label('FMV MM4 Total Volume'),
                                     ])->columns(4),
 
 
                                 TextInput::make('fmv_mm_average_total_volume')
+                                    ->prefix('m3')
                                     ->label('FMV MM Average Total Volume'),
                                 TextInput::make('mut_minus_mm_average')
+                                    ->prefix('m3')
                                     ->label('MUT Minus MM Average'),
                                 TextInput::make('mut_minus_mm_average_percent')
+                                    ->prefix('m3')
                                     ->label('MUT Minus MM Average Percent'),
                             ]),
 
