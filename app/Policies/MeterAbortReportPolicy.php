@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Sitemap;
+use App\Models\MeterAbortReport;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class SitemapPolicy
+class MeterAbortReportPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class SitemapPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_sitemap');
+        return $user->can('view_any_meter::abort::report');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Sitemap  $sitemap
+     * @param  \App\Models\MeterAbortReport  $meterAbortReport
      * @return bool
      */
-    public function view(User $user, Sitemap $sitemap): bool
+    public function view(User $user, MeterAbortReport $meterAbortReport): bool
     {
-        return $user->can('view_sitemap');
+        return $user->can('view_meter::abort::report');
     }
 
     /**
@@ -41,31 +41,31 @@ class SitemapPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_sitemap');
+        return $user->can('create_meter::abort::report');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Sitemap  $sitemap
+     * @param  \App\Models\MeterAbortReport  $meterAbortReport
      * @return bool
      */
-    public function update(User $user, Sitemap $sitemap): bool
+    public function update(User $user, MeterAbortReport $meterAbortReport): bool
     {
-        return $user->can('update_sitemap');
+        return $user->can('update_meter::abort::report');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Sitemap  $sitemap
+     * @param  \App\Models\MeterAbortReport  $meterAbortReport
      * @return bool
      */
-    public function delete(User $user, Sitemap $sitemap): bool
+    public function delete(User $user, MeterAbortReport $meterAbortReport): bool
     {
-        return $user->can('delete_sitemap');
+        return $user->can('delete_meter::abort::report');
     }
 
     /**
@@ -76,17 +76,17 @@ class SitemapPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_sitemap');
+        return $user->can('delete_any_meter::abort::report');
     }
 
     /**
      * Determine whether the user can permanently delete.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Sitemap  $sitemap
+     * @param  \App\Models\MeterAbortReport  $meterAbortReport
      * @return bool
      */
-    public function forceDelete(User $user, Sitemap $sitemap): bool
+    public function forceDelete(User $user, MeterAbortReport $meterAbortReport): bool
     {
         return $user->can('{{ ForceDelete }}');
     }
@@ -106,10 +106,10 @@ class SitemapPolicy
      * Determine whether the user can restore.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Sitemap  $sitemap
+     * @param  \App\Models\MeterAbortReport  $meterAbortReport
      * @return bool
      */
-    public function restore(User $user, Sitemap $sitemap): bool
+    public function restore(User $user, MeterAbortReport $meterAbortReport): bool
     {
         return $user->can('{{ Restore }}');
     }
@@ -129,10 +129,10 @@ class SitemapPolicy
      * Determine whether the user can replicate.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Sitemap  $sitemap
+     * @param  \App\Models\MeterAbortReport  $meterAbortReport
      * @return bool
      */
-    public function replicate(User $user, Sitemap $sitemap): bool
+    public function replicate(User $user, MeterAbortReport $meterAbortReport): bool
     {
         return $user->can('{{ Replicate }}');
     }

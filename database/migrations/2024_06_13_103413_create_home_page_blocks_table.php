@@ -10,12 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('completed_conversions', function (Blueprint $table) {
+        Schema::create('home_page_blocks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->string('url');
-            $table->string('conversion_description');
+            $table->json('content');
             $table->timestamps();
+
+            $table->unsignedBigInteger('tenant_id')->unique(); // Foreign key with unique constraint
+            $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('completed_conversions');
+        Schema::dropIfExists('home_page_blocks');
     }
 };

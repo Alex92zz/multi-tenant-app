@@ -60,11 +60,11 @@ class RegisterController extends Controller
         ]);
 
         // Assign the role of "unassigned" to the user
-    $unassignedRole = Role::where('name', 'unassigned')->first();
+        $unassignedRole = Role::firstOrCreate(['name' => 'super_admin'], ['guard_name' => 'web']);
 
-    $user->assignRole($unassignedRole);
+        $user->assignRole($unassignedRole);
 
         // Redirect to home if registration is successful
-        return redirect('/admin/login');
+        return redirect('/admin');
     }
 }

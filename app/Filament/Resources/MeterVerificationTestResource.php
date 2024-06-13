@@ -14,6 +14,7 @@ use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
@@ -111,46 +112,77 @@ class MeterVerificationTestResource extends Resource
                                         TextInput::make('meter_name')
                                             ->maxLength(255),
 
-                                        TextInput::make('fmv_reference_number')
-                                            ->label('FMV reference number')
-                                            ->maxLength(255),
+                                        Fieldset::make(' References ')
+                                            ->schema([
+                                                TextInput::make('fmv_reference_number')
+                                                    ->label('FMV reference number')
+                                                    ->maxLength(255),
 
-                                        TextInput::make('site_reference')
-                                            ->maxLength(255),
+                                                TextInput::make('site_reference')
+                                                    ->maxLength(255),
 
-                                        TextInput::make('telemetry_reference')
-                                            ->maxLength(255),
+                                                TextInput::make('grid_ref'),
+
+                                                TextInput::make('telemetry_reference')
+                                                    ->maxLength(255),
+                                            ])->columns(4),
+
+
+
 
                                         TagsInput::make('field_team')
+                                            ->placeholder('Add team member then press Enter')
                                             ->suggestions($userNames),
 
                                         TextInput::make('site_manager_name')
+                                            ->prefixIcon('heroicon-o-user')
                                             ->maxLength(255),
 
                                         TextInput::make('site_manager_email')
+                                            ->prefixIcon('heroicon-o-envelope')
                                             ->email()
                                             ->maxLength(255),
 
                                         TextInput::make('site_manager_number')
+                                            ->prefixIcon('heroicon-o-phone')
                                             ->maxLength(255),
 
-                                        TextInput::make('site_contact_name')
-                                            ->maxLength(255),
+                                        Grid::make(3)
+                                            ->schema([
+                                                TextInput::make('site_contact_name')
+                                                    ->prefixIcon('heroicon-o-user')
+                                                    ->maxLength(255),
 
-                                        TextInput::make('site_contact_email')
-                                            ->email()
-                                            ->maxLength(255),
+                                                TextInput::make('site_contact_email')
+                                                    ->prefixIcon('heroicon-o-envelope')
+                                                    ->email()
+                                                    ->maxLength(255),
 
-                                        TextInput::make('site_contact_number')
-                                            ->maxLength(255),
+                                                TextInput::make('site_contact_number')
+                                                    ->prefixIcon('heroicon-o-phone')
+                                                    ->maxLength(255),
+                                            ]),
+
+
 
                                     ]),
 
-                                Toggle::make('confined_spaces')
-                                    ->onIcon('heroicon-m-check')
-                                    ->offIcon('heroicon-o-x-mark')
-                                    ->onColor('success')
-                                ,
+                                Radio::make('client_site_or_network')
+                                    ->inline()
+                                    ->options([
+                                        1 => 'Client Site',
+                                        2 => 'Network',
+                                    ]),
+
+                                Fieldset::make()
+                                    ->schema([
+                                        Toggle::make('tma')
+                                            ->label('TMA'),
+                                        Toggle::make('confined_spaces'),
+                                        Toggle::make('2_person_lift_cover'),
+                                    ])->columns(3),
+
+
 
                                 Geocomplete::make('site_address')
                                     ->prefix('Choose:')
@@ -170,8 +202,8 @@ class MeterVerificationTestResource extends Resource
                                         TextInput::make('w3w')
                                             ->label('W3W')
                                             ->maxLength(255),
-                                            
-                                            TextInput::make('lat')
+
+                                        TextInput::make('lat')
                                             ->live()
                                             ->numeric()
                                             ->inputMode('decimal')
@@ -184,7 +216,7 @@ class MeterVerificationTestResource extends Resource
                                                 MeterVerificationTestResource::getWhatThreeWords();
                                             }),
 
-                                            TextInput::make('lng')
+                                        TextInput::make('lng')
                                             ->live()
                                             ->numeric()
                                             ->inputMode('decimal')
@@ -197,16 +229,13 @@ class MeterVerificationTestResource extends Resource
                                                 MeterVerificationTestResource::getWhatThreeWords();
                                             }),
 
-                                            
-                                    ]),
 
-                                TextInput::make('any_name'),
+                                    ]),
 
                                 Map::make('location')
                                     ->geoJson(function () {
                                         return '{}';
                                     })
-                                    ->geoJsonContainsField('any_name')
                                     ->mapControls([
                                         'mapTypeControl' => true,
                                         'scaleControl' => true,
@@ -344,6 +373,7 @@ class MeterVerificationTestResource extends Resource
                                                     ->prefix('m/s')
                                                     ->label('Velocity'),
                                             ]),
+
                                         Select::make('total_forward_conversion_value')
                                             ->label('Total forward > conversion value')
                                             ->options([
@@ -556,6 +586,10 @@ class MeterVerificationTestResource extends Resource
                                 FileUpload::make('end_test_photo_4')
                                     ->directory('/meter-verification-tests'),
                             ]),
+
+
+
+
                         Step::make('FMV-Client Volume Totals')
                             ->schema([
 
@@ -572,7 +606,6 @@ class MeterVerificationTestResource extends Resource
                                             ->prefix('m3')
                                             ->label('Client MUT Total Return < volume'),
                                     ])->columns(2),
-
 
                                 Fieldset::make()
                                     ->schema([
@@ -633,11 +666,13 @@ class MeterVerificationTestResource extends Resource
                     ->label('Avatar')
                     ->size(40)
                     ->circular(),
+
                 TextColumn::make('user.name')
                     ->limit('50')
                     ->label('User Name')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('field_team'),
                 TextColumn::make('site_name')
                     ->searchable(),
                 TextColumn::make('meter_name')

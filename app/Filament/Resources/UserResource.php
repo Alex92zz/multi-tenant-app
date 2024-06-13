@@ -82,6 +82,7 @@ class UserResource extends Resource
                         'employee' => 'warning',
                         'super_admin' => 'success',
                         'client' => 'danger',
+                        'panel_user' => 'danger',
                     })
                     ->state(function ($record) {
                         // Retrieve the user associated with the current record

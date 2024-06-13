@@ -88,7 +88,7 @@ class EmployeeLeaveRequestPolicy
      */
     public function forceDelete(User $user, EmployeeLeaveRequest $employeeLeaveRequest): bool
     {
-        return $user->can('force_delete_employee::leave::request');
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -99,7 +99,7 @@ class EmployeeLeaveRequestPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_employee::leave::request');
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
@@ -111,7 +111,7 @@ class EmployeeLeaveRequestPolicy
      */
     public function restore(User $user, EmployeeLeaveRequest $employeeLeaveRequest): bool
     {
-        return $user->can('restore_employee::leave::request');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -122,7 +122,7 @@ class EmployeeLeaveRequestPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_employee::leave::request');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -134,7 +134,7 @@ class EmployeeLeaveRequestPolicy
      */
     public function replicate(User $user, EmployeeLeaveRequest $employeeLeaveRequest): bool
     {
-        return $user->can('replicate_employee::leave::request');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -145,7 +145,7 @@ class EmployeeLeaveRequestPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_employee::leave::request');
+        return $user->can('{{ Reorder }}');
     }
 
 }
