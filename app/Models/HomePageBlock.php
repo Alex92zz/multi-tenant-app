@@ -10,6 +10,8 @@ class HomePageBlock extends Model
     use HasFactory;
 
     protected $fillable = [
+        'title',
+        'meta_description',
         'content',
         'tenant_id', // Include tenant_id in fillable array
     ];

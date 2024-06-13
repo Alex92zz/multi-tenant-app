@@ -12,6 +12,8 @@ return new class extends Migration {
     {
         Schema::create('home_page_blocks', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('meta_description');
             $table->json('content');
             $table->timestamps();
 

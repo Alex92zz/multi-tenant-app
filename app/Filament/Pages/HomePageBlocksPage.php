@@ -7,6 +7,7 @@ use App\Models\Tenant;
 use App\Models\WebsiteGeneralSettings;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
@@ -42,11 +43,15 @@ class HomePageBlocksPage extends Page implements HasForms
         // Check if there's already a HomePageBlock for the current tenant
         $this->homePageBlock = HomePageBlock::where('tenant_id', $tenant->id)->first();
 
-        $newFormData = $this->homePageBlock->content['data'];
+    
+        if ($this->homePageBlock) {
 
-        if ($newFormData) {
+            $newFormData = $this->homePageBlock;
+
             $this->form->fill([
-                'content' => $newFormData,
+                'title' => $newFormData->content['title'],
+                'meta_description' => $newFormData->content['meta_description'],
+                'content' => $newFormData->content['content'],
             ])->statePath('data');
         }
     }
@@ -55,44 +60,48 @@ class HomePageBlocksPage extends Page implements HasForms
 
     public function form(Form $form): Form
     {
-        $tenant = Tenant::where('domain', request()->getHost())->firstOrFail();
-
         $form->schema([
-            // Customize your form fields based on your requirements
-            Builder::make('content')
-                ->blocks([
-                    Builder\Block::make('heading')
-                        ->schema([
-                            TextInput::make('content')
-                                ->label('Heading')
-                                ->required(),
-                            Select::make('level')
-                                ->options([
-                                    'h1' => 'Heading 1',
-                                    'h2' => 'Heading 2',
-                                    'h3' => 'Heading 3',
-                                    'h4' => 'Heading 4',
-                                    'h5' => 'Heading 5',
-                                    'h6' => 'Heading 6',
+
+            Card::make()
+                ->schema([
+                    TextInput::make('title'),
+                    TextInput::make('meta_description'),
+                    // Customize your form fields based on your requirements
+                    Builder::make('content')
+                        ->blocks([
+                            Block::make('heading')
+                                ->schema([
+                                    TextInput::make('content')
+                                        ->label('Heading')
+                                        ->required(),
+                                    Select::make('level')
+                                        ->options([
+                                            'h1' => 'Heading 1',
+                                            'h2' => 'Heading 2',
+                                            'h3' => 'Heading 3',
+                                            'h4' => 'Heading 4',
+                                            'h5' => 'Heading 5',
+                                            'h6' => 'Heading 6',
+                                        ])
+                                        ->required(),
                                 ])
-                                ->required(),
-                        ])
-                        ->columns(2),
-                    Builder\Block::make('paragraph')
-                        ->schema([
-                            Textarea::make('content')
-                                ->label('Paragraph')
-                                ->required(),
-                        ]),
-                    Builder\Block::make('image')
-                        ->schema([
-                            FileUpload::make('url')
-                                ->label('Image')
-                                ->image()
-                                ->required(),
-                            TextInput::make('alt')
-                                ->label('Alt text')
-                                ->required(),
+                                ->columns(2),
+                            Block::make('paragraph')
+                                ->schema([
+                                    Textarea::make('content')
+                                        ->label('Paragraph')
+                                        ->required(),
+                                ]),
+                            Block::make('image')
+                                ->schema([
+                                    FileUpload::make('url')
+                                        ->label('Image')
+                                        ->image()
+                                        ->required(),
+                                    TextInput::make('alt')
+                                        ->label('Alt text')
+                                        ->required(),
+                                ]),
                         ]),
                 ]),
         ])->statePath('data');
@@ -131,7 +140,9 @@ class HomePageBlocksPage extends Page implements HasForms
             // Create new HomePageBlock
             HomePageBlock::create([
                 'tenant_id' => $tenant->id,
-                'content' => $formData,
+                'title' => $formData['title'],
+                'meta_description' => $formData['meta_description'],
+                'content' => $formData['content'],
             ]);
         }
 
