@@ -5,21 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HomePageBlock extends Model
+class ServicesPageBlock extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'title',
         'meta_description',
-        'hero',
         'content',
         'tenant_id', // Include tenant_id in fillable array
     ];
 
     protected $casts = [
         'content' => 'array',
-        'hero' => 'array',
     ];
 
     public function tenant()

@@ -25,5 +25,20 @@ class Tenant extends Model
         return $this->hasOne(HomePageBlock::class);
     }
 
+    public function servicesPageBlock()
+    {
+        return $this->hasOne(ServicesPageBlock::class);
+    }
+
+    public function galleryPageBlock()
+    {
+        return $this->hasOne(GalleryPageBlock::class);
+    }
+
+    public function ContactPageBlock()
+    {
+        return $this->hasOne(ContactPageBlock::class);
+    }
+
     
 }

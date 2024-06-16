@@ -8,9 +8,9 @@
 
 
     <meta name="author" content="SemiColonWeb">
-    <title>SEO Demo | Canvas</title>
+    <title>{{ $homePageBlock['title'] }}</title>
     <meta name="description"
-        content="Create SEO Services &amp; Lead Generation Management Websites with Canvas Template. Get Canvas to build powerful websites easily with the Highly Customizable &amp; Best Selling Bootstrap Template, today.">
+        content="{{ $homePageBlock['meta_description'] }}">
 
     <!-- Core Style -->
     <link rel="stylesheet" href="{{ asset('style.css') }}">

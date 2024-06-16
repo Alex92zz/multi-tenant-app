@@ -27,7 +27,10 @@ class WebsiteGeneralSettingsPage extends Page implements HasForms
 
     protected static string $view = 'filament.pages.website-general-settings-page';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationLabel = 'Settings';
+
+    protected static ?int $navigationSort = 5;
+
 
     protected ?WebsiteGeneralSettings $websiteData = null;
     public ?array $data = [];

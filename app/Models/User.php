@@ -52,18 +52,11 @@ class User extends Authenticatable
         return $this->user->email;
     }
 
-    public function completedConversion()
-    {
-        return $this->hasMany(CompletedConversion::class);
-    }
 
     public function meterVerificationTest()
     {
         return $this->belongsTo(MeterVerificationTest::class);
     }
 
-    public function meterAbortReport()
-    {
-        return $this->belongsTo(MeterAbortReport::class);
-    }
+
 }
