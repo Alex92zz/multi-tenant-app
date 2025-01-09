@@ -1,66 +1,34 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel and Filament PHP Software-as-a-Service (Saas) Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This a unfinished Laravel Software-as-a-Service (Saas) project which would create websites in seconds using artificial intelligence (AI) and a set of prebuilt templates (10 - 20). 
+The goal was to build very simple websites quickly, build them for free but charge hosting £100/year. 
+Please bear in mind that the project is unfinished. I build functionality to create/edit pages, add content or multiple sections and functionality to show different website depending on domain name accessing the app. I also added role-based access control using Laravel and Spatie Permissions but it's not finalised. 
 
-## About Laravel
+## Home Page Controller Code Review 
+Multiple domains would point to the same application. The app would check the domain name, and depending on the domain name it will get the theme and database data for that particular domain/website. 
+![home-page-controller](https://github.com/user-attachments/assets/5964c9c9-1103-403a-9cce-fb6fa2adaf5f)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 1. Getting Host (domain name) 
+### 2. Getting Website Data
+Based on domain name accessing the app it is getting all the data from the database for that website. This section needs improvement. 
+### 3. Returning View
+The app returns the view based on the theme linked to the domain and also sends all the data of the website using compact(); Every domain will have a theme linked to it. The theme MUST be have exact name as the folder. 
+### 4. Theme Folder 
+As you can see I added two website theme's in the project, each having folder structure exactly the same. All themes MUST have the same structure, including in the components folder, all files need to have the same name. 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Admin Panel Managing Themes and Domains
+Image showing a domain name linked to a theme, in this case theme index-classic linked to 4 domains and theme name have exact name as theme folders in previous image.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![themes-linked-to-domain-names](https://github.com/user-attachments/assets/17d252f2-7e16-422b-8a61-6ad2bee02a86)
 
-## Learning Laravel
+I haven't had time to do it yet but it needs to link Users to domain names, this way each domain name has a theme and a user and each user will see his own data linked to the website he owns. 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Editing Home Page From Admin Panel
+This admin panel page could be improved to look better but the basic functionality is there. Users can add or delete multiple sections from the website. Image looks blurry because I resize it from 5000 pixels to 1000 pixels. Editing the other pages would function in similar way. 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+![Home-Page-Blocks-Page-Multi-Tenant-App-01-09-2025_12_20_PM (1)](https://github.com/user-attachments/assets/4cb56928-0d36-4667-aae6-a7c941f3158a)
+    
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Adding AI to create content
+Another feature which is missing is adding feature which uses ChatGPT which only admins will have access to, to create basic content for the website, later individual users can modify it. Admin will provide basic information regarding the business and using API first will get the title for home page, then description, then h1 and so on... Admin will only give one detailed description and AI will do the rest. Even create images which later users or admin can change it. Users will see only their own data and website. 
