@@ -1,117 +1,58 @@
-<!doctype html>
-<html class="no-js" lang="zxx">
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="author" content="SemiColonWeb">
+
+        <!-- Document Title
+ ============================================= -->
+ <title>{{ $title }}</title>
+ <meta name="description" content="{{ $metaDescription }}">
+
+
+    <!-- Font Imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=PT+Serif:ital@0;1&display=swap"
+        rel="stylesheet">
+
+    <!-- Core Style -->
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <!-- Font Icons -->
+    <link rel="stylesheet" href="{{ asset('css/font-icons.css') }}">
+    <!-- Plugins/Components CSS -->
+    <link rel="stylesheet" href="{{ asset('css/swiper.css') }}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     @yield('meta')
-    
-    <meta name="google-site-verification" content="l3nm2VnrEyQdS-USxayTwC5klDpayUWQIa7h6OKDTDg" />
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/logo/browser-logo.jpg') }}">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
-
-    <!-- Plugins -->
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins-2.css') }}">
-
-    <!-- Core Style Css -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style-2.css') }}">
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/base-2.css') }}">
 
 </head>
 
-<body class="main-bg">
+<body class="stretched">
 
-    @include('components/preloader-and-scroll-on-top')
-
-    @include('components/navbar')
-
-    <!-- main-area -->
+    <!-- Document Wrapper
+ ============================================= -->
+    <div id="wrapper">
 
 
-        @yield('content')
+@yield('content')
 
+    </div><!-- #wrapper end -->
 
+    <!-- Go To Top
+ ============================================= -->
+    <div id="gotoTop" class="uil uil-angle-up"></div>
 
-    <!-- main-area-end -->
+    <!-- Javascripts
+ ============================================= -->
+    <script src="{{ asset('js/plugins.min.js') }}"></script>
+    <script src="{{ asset('js/functions.bundle.js') }}"></script>
 
-    @include('components/footer')
-
-
-
-
-    <!-- jQuery -->
-    <script src="{{ asset('assets/js/jquery-3.6.0.min-2.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-migrate-3.4.0.min-2.js') }}"></script>
-
-    <!-- plugins -->
-    <script src="{{ asset('assets/js/plugins-2.js') }}"></script>
-
-    <script src="{{ asset('assets/js/ScrollTrigger.min-2.js') }}"></script>
-
-    <!-- custom scripts -->
-    <script src="{{ asset('assets/js/scripts-2.js') }}"></script>
-
-    @yield('scripts')
-    
-    <script>
-        function obfuscateEmail(email) {
-            var obfuscatedEmail = email.replace(/[a-zA-Z]/g, function(c) {
-                return '&#' + c.charCodeAt(0) + ';';
-            });
-            return obfuscatedEmail;
-        }
-
-        // Example email address
-        var originalEmail = 'info@fmvgroup.co.uk';
-        var obfuscatedEmail = obfuscateEmail(originalEmail);
-
-        // Get the target element by its ID
-        var emailLink = document.getElementById('obfuscatedEmailLink');
-
-        // Set the obfuscated email address as the href and innerHTML of the <a> element
-        emailLink.innerHTML = obfuscatedEmail;
-    </script>
-
-<script defer>
-    
-    var scriptreCAPTCHAAdded = false;
-        // Function to add reCAPTCHA script
-        function addRecaptchaScript() {
-            var recaptchaScript = document.createElement('script');
-            recaptchaScript.src = 'https://www.google.com/recaptcha/api.js';
-            recaptchaScript.async = true;
-            recaptchaScript.defer = true;
-            document.head.appendChild(recaptchaScript);
-            
-            var scriptreCAPTCHAAdded = true;
-
-            // Remove the scroll event listener after adding the script
-            window.removeEventListener('scroll', onScroll);
-        }
-
-        // Function to handle the scroll event
-        function onScrollreCAPTCHA() {
-            // Adjust the threshold as needed
-            var scrollThreshold = 100;
-
-            // Check if the user has scrolled beyond the threshold
-            if (window.scrollY > scrollThreshold) {
-                addRecaptchaScript();
-            }
-        }
-
-        // Add scroll event listener
-        window.addEventListener('scroll', onScrollreCAPTCHA);
-    </script>
 </body>
-
 </html>

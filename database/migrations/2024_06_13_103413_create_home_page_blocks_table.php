@@ -14,7 +14,11 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('meta_description');
-            $table->json('content');
+            $table->json('hero');
+            $table->json('about_us');
+            $table->json('gallery');
+            $table->json('testimonials');
+            $table->json('logos');
             $table->timestamps();
 
             $table->unsignedBigInteger('tenant_id')->unique(); // Foreign key with unique constraint

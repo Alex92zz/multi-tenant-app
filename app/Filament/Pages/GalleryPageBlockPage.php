@@ -2,7 +2,7 @@
 
 namespace App\Filament\Pages;
 
-use App\Models\HomePageBlock;
+use App\Models\GalleryPageBlock;
 use App\Models\Tenant;
 use App\Models\WebsiteGeneralSettings;
 use Filament\Actions\Action;
@@ -38,19 +38,20 @@ class GalleryPageBlockPage extends Page
 
     public ?array $data = [];
 
-    protected ?HomePageBlock $homePageBlock = null;
+    protected ?GalleryPageBlock $galleryPageBlock = null;
 
     public function mount(): void
     {
         $tenant = Tenant::where('domain', request()->getHost())->firstOrFail();
 
-        // Check if there's already a HomePageBlock for the current tenant
-        $this->homePageBlock = HomePageBlock::where('tenant_id', $tenant->id)->first();
+        // Check if there's already a galleryPageBlock for the current tenant
+        $this->galleryPageBlock = GalleryPageBlock::where('tenant_id', $tenant->id)->first();
 
     
-        if ($this->homePageBlock) {
+        if ($this->galleryPageBlock) {
 
-            $newFormData = $this->homePageBlock;
+            $newFormData = $this->galleryPageBlock;
+            Logg:info($newFormData);
 
             $this->form->fill([
                 'title' => $newFormData->content['title'],
@@ -72,31 +73,8 @@ class GalleryPageBlockPage extends Page
                     TextInput::make('meta_description'),
                     // Customize your form fields based on your requirements
                     Builder::make('content')
+                    ->label('Gallery Images')
                         ->blocks([
-                            Block::make('heading')
-                                ->schema([
-                                    TextInput::make('content')
-                                        ->label('Heading')
-                                        ->required(),
-                                    Select::make('level')
-                                        ->options([
-                                            'h1' => 'Heading 1',
-                                            'h2' => 'Heading 2',
-                                            'h3' => 'Heading 3',
-                                            'h4' => 'Heading 4',
-                                            'h5' => 'Heading 5',
-                                            'h6' => 'Heading 6',
-                                        ])
-                                        ->required(),
-                                ])
-                                ->columns(2),
-                            Block::make('paragraph')
-                            ->icon('heroicon-m-bars-3-bottom-left')
-                                ->schema([
-                                    Textarea::make('content')
-                                        ->label('Paragraph')
-                                        ->required(),
-                                ]),
                             Block::make('image')
                             ->icon('heroicon-o-photo')
                                 ->schema([
@@ -108,7 +86,11 @@ class GalleryPageBlockPage extends Page
                                         ->label('Alt text')
                                         ->required(),
                                 ]),
-                        ]),
+                        ])
+                        ->blockNumbers(false)
+                        ->addActionLabel('Add Image')
+                        ->reorderable(true)
+                        ->collapsed(),
                 ]),
         ])->statePath('data');
 
@@ -134,17 +116,17 @@ class GalleryPageBlockPage extends Page
         $formData = $this->form->getState();
         Log::info('form data' . json_encode($formData));
 
-        // Check if a HomePageBlock already exists for the tenant
-        $homePageBlock = HomePageBlock::where('tenant_id', $tenant->id)->first();
+        // Check if a galleryPageBlock already exists for the tenant
+        $galleryPageBlock = galleryPageBlock::where('tenant_id', $tenant->id)->first();
 
-        if ($homePageBlock) {
-            // Update existing HomePageBlock
-            $homePageBlock->update([
+        if ($galleryPageBlock) {
+            // Update existing galleryPageBlock
+            $galleryPageBlock->update([
                 'content' => $formData,
             ]);
         } else {
-            // Create new HomePageBlock
-            HomePageBlock::create([
+            // Create new galleryPageBlock
+            galleryPageBlock::create([
                 'tenant_id' => $tenant->id,
                 'title' => $formData['title'],
                 'meta_description' => $formData['meta_description'],
@@ -153,6 +135,6 @@ class GalleryPageBlockPage extends Page
         }
 
         // Redirect back with success message
-        return redirect()->back()->with('success', 'HomePageBlock saved successfully.');
+        return redirect()->back()->with('success', 'galleryPageBlock saved successfully.');
     }
 }

@@ -57,7 +57,10 @@ class HomePageBlocksPage extends Page implements HasForms
                 'title' => $newFormData['title'],
                 'meta_description' => $newFormData['meta_description'],
                 'hero' => $newFormData['hero'],
-                'content' => $newFormData['content'],
+                'about_us' => $newFormData['about_us'],
+                'gallery' => $newFormData['gallery'],
+                'testimonials' => $newFormData['testimonials'],
+                'logos' => $newFormData['logos'],
             ])->statePath('data');
         }
     }
@@ -71,12 +74,13 @@ class HomePageBlocksPage extends Page implements HasForms
             Card::make()
                 ->schema([
                     Fieldset::make('Meta Data')
-                    ->schema([
-                        TextInput::make('title'),
-                        TextInput::make('meta_description'),
-                    ]),
+                        ->schema([
+                            TextInput::make('title'),
+                            TextInput::make('meta_description'),
+                        ]),
 
                     Builder::make('hero')
+                        ->label('Hero Section')
                         ->blocks([
                             Block::make('heading')
                                 ->schema([
@@ -85,7 +89,7 @@ class HomePageBlocksPage extends Page implements HasForms
                                         ->required(),
                                     Select::make('level')
                                         ->options([
-                                            'h1' => 'Heading 1',
+                                            'h1' => 'H1',
                                         ])
                                         ->required(),
                                 ])
@@ -108,36 +112,107 @@ class HomePageBlocksPage extends Page implements HasForms
                                         ->label('Alt text')
                                         ->required(),
                                 ]),
-                        ]),
+                        ])
 
+                        ->blockNumbers(false)
+                        ->addActionLabel('Add to Hero Section')
+                        ->reorderable(false)
+                        ->collapsed()
+                        ->maxItems(3)
+                    ,
 
-                    Builder::make('content')
+                    Builder::make('about_us')
+                        ->label('About Us')
                         ->blocks([
-                            Block::make('heading')
+                            Block::make('banner')
+                                ->icon('heroicon-o-chat-bubble-bottom-center-text')
                                 ->schema([
-                                    TextInput::make('content')
+                                    TextInput::make('banner_text')
+                                        ->label('Banner Text'),
+                                ]),
+                            Block::make('img_left_txt_right')
+                                ->icon('heroicon-o-chat-bubble-bottom-center-text')
+                                ->schema([
+                                    TextInput::make('heading')
                                         ->label('Heading')
                                         ->required(),
-                                    Select::make('level')
-                                        ->options([
-                                            'h2' => 'Heading 2',
-                                            'h3' => 'Heading 3',
-                                            'h4' => 'Heading 4',
-                                            'h5' => 'Heading 5',
-                                            'h6' => 'Heading 6',
-                                        ])
+                                    Textarea::make('paragraph')
+                                        ->label('Paragraph')
                                         ->required(),
-                                ])
-                                ->columns(2),
-                            Block::make('paragraph')
-                                ->icon('heroicon-m-bars-3-bottom-left')
+                                    FileUpload::make('url')
+                                        ->label('Image')
+                                        ->image()
+                                        ->required(),
+                                ]),
+                            Block::make('img_right_txt_left')
+                                ->icon('heroicon-o-chat-bubble-bottom-center-text')
                                 ->schema([
-                                    Textarea::make('content')
+                                    FileUpload::make('url')
+                                        ->label('Image')
+                                        ->image()
+                                        ->required(),
+                                    TextInput::make('heading')
+                                        ->label('Heading')
+                                        ->required(),
+                                    Textarea::make('paragraph')
                                         ->label('Paragraph')
                                         ->required(),
                                 ]),
-                            Block::make('image')
+
+                        ])
+                        ->blockNumbers(false)
+                        ->addActionLabel('Add to About Us Section')
+                        ->reorderable(true)
+                        ->collapsed()
+                    ,
+
+                    Builder::make('gallery')
+                        ->label('Gallery Images')
+                        ->blocks([
+                            Block::make('gallery')
                                 ->icon('heroicon-o-photo')
+                                ->label('Image')
+                                ->schema([
+                                    FileUpload::make('url')
+                                        ->label('Image')
+                                        ->image()
+                                        ->required(),
+                                    TextInput::make('alt')
+                                        ->label('Photo Description'),
+                                ]),
+                        ])
+                        ->blockNumbers(false)
+                        ->addActionLabel('Add Image')
+                        ->reorderable(true)
+                        ->collapsed()
+                    ,
+
+                    Builder::make('testimonials')
+                        ->label('Testimonials')
+                        ->blocks([
+                            Block::make('testimonials')
+                                ->icon('heroicon-o-chat-bubble-bottom-center-text')
+                                ->label('Testimonial')
+                                ->schema([
+                                    Textarea::make('paragraph')
+                                        ->label('Testimonial'),
+                                    TextInput::make('name')
+                                        ->label('Name'),
+                                ]),
+                        ])
+                        ->blockNumbers(false)
+                        ->addActionLabel('Add Testimonial')
+                        ->reorderable(true)
+                        ->collapsed()
+                    ,
+
+
+                    Builder::make('logos')
+                        ->label('Logo Brands')
+                        ->blocks([
+                            Block::make('logo_brands')
+                                ->icon('heroicon-o-photo')
+                                ->label('Image Logo')
                                 ->schema([
                                     FileUpload::make('url')
                                         ->label('Image')
@@ -147,7 +222,12 @@ class HomePageBlocksPage extends Page implements HasForms
                                         ->label('Alt text')
                                         ->required(),
                                 ]),
-                        ]),
+                        ])
+                        ->blockNumbers(false)
+                        ->addActionLabel('Add Logo')
+                        ->reorderable(true)
+                        ->collapsed()
+                    ,
                 ]),
         ])->statePath('data');
 
@@ -179,10 +259,14 @@ class HomePageBlocksPage extends Page implements HasForms
         if ($homePageBlock) {
             // Update existing HomePageBlock
             $homePageBlock->update([
+                'tenant_id' => $tenant->id,
                 'title' => $formData['title'],
                 'meta_description' => $formData['meta_description'],
                 'hero' => $formData['hero'],
-                'content' => $formData['content'],
+                'about_us' => $formData['about_us'],
+                'gallery' => $formData['gallery'],
+                'testimonials' => $formData['testimonials'],
+                'logos' => $formData['logos'],
             ]);
         } else {
             // Create new HomePageBlock
@@ -191,7 +275,10 @@ class HomePageBlocksPage extends Page implements HasForms
                 'title' => $formData['title'],
                 'meta_description' => $formData['meta_description'],
                 'hero' => $formData['hero'],
-                'content' => $formData['content'],
+                'about_us' => $formData['about_us'],
+                'gallery' => $formData['gallery'],
+                'testimonials' => $formData['testimonials'],
+                'logos' => $formData['logos'],
             ]);
         }
 

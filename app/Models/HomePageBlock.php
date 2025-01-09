@@ -13,13 +13,19 @@ class HomePageBlock extends Model
         'title',
         'meta_description',
         'hero',
-        'content',
+        'about_us',
+        'gallery',
+        'testimonials',
+        'logos',
         'tenant_id', // Include tenant_id in fillable array
     ];
 
     protected $casts = [
-        'content' => 'array',
         'hero' => 'array',
+        'about_us' => 'array',
+        'gallery' => 'array',
+        'testimonials' => 'array',
+        'logos' => 'array',
     ];
 
     public function tenant()
